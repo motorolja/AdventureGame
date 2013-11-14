@@ -62,6 +62,8 @@ void Player::removeItem(int index)
         delete m_inventory[index];
         m_inventory.erase(m_inventory.begin()+index);
     }
+    else
+    std::cout << "the item did not excist(exception)!\n";
 }
 
 vector<Item*> Player::getInventory()
