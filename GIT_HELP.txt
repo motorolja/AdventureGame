@@ -1,0 +1,29 @@
+//klona
+git clone https://github.com/ditt_namn/repo_namn
+
+//inställningar
+git config --global user.name "Your Name Here"
+git config --global user.email "your_email@example.com"
+
+//lägg till källa till fork
+git remote add upstream https://github.com/orginal_skapare_av_repo/repo_namn
+
+//lägg till remote till repo
+git remote set-url origin https://github.com/ditt_namn/repo_namn
+
+//lägg till filer till ny commit
+git add fil fil2 fil3
+git commit -m "meddelande"
+
+//pusha till din remote repository
+git push origin master
+
+//rebase(endast när din pullrequest är acceptad och mergead)
+git fetch upstream
+git rebase upstream/master
+
+//kolla status på den aktuella commit som inte än har commitats
+git status
+
+//kolla alla branches som finns
+git branch -va
