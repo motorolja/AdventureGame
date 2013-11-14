@@ -17,11 +17,11 @@ public:
     ~Player();
     
     int getHealth() const;
-    void setHealth();
+    void setHealth(int);
     
     void addItem(Item*);
     void removeItem(int index);
-    vector<Item*> getInventory();
+    std::vector<Item*> getInventory();
     
     void addStatus(Status);
     void clearStatus();
@@ -31,8 +31,8 @@ public:
     
     void update();
 private:
-    vector<Item*> m_inventory;
-    vector<Status> m_statuses;
+    std::vector<Item*> m_inventory;
+    std::vector<Status> m_statuses;
     unsigned int m_health;
     Position m_position;
 };

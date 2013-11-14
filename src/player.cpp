@@ -66,9 +66,9 @@ void Player::removeItem(int index)
     std::cout << "the item did not excist(exception)!\n";
 }
 
-vector<Item*> Player::getInventory()
+std::vector<Item*> Player::getInventory()
 {
-    vector<Item*> result;
+    std::vector<Item*> result;
     for(Item* it : m_inventory)
         result.push_back(it);
     return result;
