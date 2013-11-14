@@ -1,5 +1,6 @@
 // Test fil
 #include <iostream>
+#include <vector>
 #include "player.h"
 
 using namespace std;
@@ -23,26 +24,32 @@ int main()
     cout << "Position: " << p.getPosition()
         << endl;
     
-    for( int i = 7; i <= 0; --i )
+    for( int i = 0; i < 7; ++i )
         p.update();
         
     p.setHealth(88);
     cout << "Health: " << p.getHealth() << endl;
+    p.setHealth(5);
+    for(int i=0;i<6;++i)
+    {
+	p.update();
+	cout << "Health: " << p.getHealth() << endl;
+    }
     
     vector<Item*> temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << it* << endl;
+        cout << "Item: " << (*it) << endl;
     p.removeItem(-1);
     p.removeItem(100);
     p.removeItem(2);
     p.removeItem(1);
     temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << it* << endl;
+        cout << "Item: " << (*it) << endl;
     p.removeItem(0);
     temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << it* << endl;
+        cout << "Item: " << (*it) << endl;
     
     
   return 0;
