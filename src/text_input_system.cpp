@@ -11,9 +11,9 @@ InputMessage TextInputSystem::getData() const
   getstr( ncurses_input );
   std::string temp, input = ncurses_input; 
   unsigned int start_of_word = 0;
-  for( int y = 0; y < input.size(); ++y )
+  for( int y = 1; y < input.size(); ++y )
     {
-      if( isblank( input.at(y) ) )
+      if( isblank( input.at(y) ) && !isblank( input.at(y-1) ) )
 	{
 	  temp.assign( input, start_of_word, y - start_of_word);
 	  if( start_of_word == 0 )
@@ -22,7 +22,7 @@ InputMessage TextInputSystem::getData() const
 	    m_arguments.push_back( temp );
 	  start_of_word = y + 1;
 	}
-      else if( y == input.size() - 1 )
+      else if( y == input.size() - 1 && !isblank( input.at(y) ) )
 	{
 	  temp.assign( input, start_of_word, y - start_of_word + 1);
 	  m_arguments.push_back( temp );
