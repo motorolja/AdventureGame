@@ -10,9 +10,10 @@ class InputSystem
 {
  public:
   InputSystem();
-  ~InputSystem();
+  virtual ~InputSystem() noexcept
+    {}
 
-  InputMessage getData() const;
+  virtual InputMessage getData() const = 0; // pure virtual
 
  private:
   std::string m_command;
