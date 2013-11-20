@@ -13,13 +13,16 @@ InputMessage TextInputSystem::getData() const
   unsigned int start_of_word = 0;
   for( int y = 1; y < input.size(); ++y )
     {
-      if( isblank( input.at(y) ) && !isblank( input.at(y-1) ) )
+      if( isblank( input.at(y) ) )
 	{
-	  temp.assign( input, start_of_word, y - start_of_word);
-	  if( start_of_word == 0 )
-	    m_command = temp;
-	  else
-	    m_arguments.push_back( temp );
+	  if( !isblank( input.at(y-1) ) )
+	    {
+	      temp.assign( input, start_of_word, y - start_of_word);
+	      if( start_of_word == 0 )
+		m_command = temp;
+	      else
+		m_arguments.push_back( temp );
+	    }
 	  start_of_word = y + 1;
 	}
       else if( y == input.size() - 1 && !isblank( input.at(y) ) )
