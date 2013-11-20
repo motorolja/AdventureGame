@@ -6,6 +6,7 @@
 
 InputMessage TextInputSystem::getData() const
 {
+  m_command.clear();
   m_arguments.clear();// tömmer för att det alltid ska finnas senaste inmatningen
   char ncurses_input[255]; // för att getstr() vill har char[] och inte tar string
   getstr( ncurses_input );
