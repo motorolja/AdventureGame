@@ -3,6 +3,7 @@
 
 //#include "message.h"
 #include <vector>
+#include <string>
 
 #define InputMessage std::string
 
@@ -10,16 +11,26 @@ class CommandParser
 {
  public:
   CommandParser();
-  ~CommandParser();
+  ~CommandParser() = default;
 
-  InputMessage getData(std::string&, std::vector<std::string>&) const;
+  // om strängen är en riktning
+  bool direction(std::string& );
+  // kommandon utan argument
+  bool noArguments(std::vector<std::string>& );
+  // alla kommandon som tar 1 argument
+  bool oneArgument(std::vector<std::string>& );
+  // om jump <int> <int> har rätt typ
+  bool jumpIntInt(std::vector<std::string>& );
   //om kommandot finns i listan
-  bool validCommand(std::string&) const;
+  bool validCommand(std::string&);
   //om kommandot har rätt antal argument och rätt typ
-  bool validArguments(std::vector<std::string>& ) const;
+  bool validArguments(std::vector<std::string>& );
+
+  InputMessage getData(std::string&, std::vector<std::string>& );
 
  private:
   std::vector<std::string> m_command_table;
+  unsigned int m_command_index; // används för att hålla koll på vilket kommando som hittats
 };
 
 #endif
