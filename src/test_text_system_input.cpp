@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ncurses.h>
+#include <curses.h>
 #include "text_input_system.h"
 
 bool curses_started = false;
@@ -10,19 +10,22 @@ void endCurses() {
 }
 
 
-void startCurses() {
-  if (curses_started) {
-    refresh();
-  }
-  else {
-    initscr();
-    cbreak();
-    echo();
-    intrflush(stdscr, false);
-    keypad(stdscr, true);
-    atexit(endCurses);
-    curses_started = true;
-  }
+void startCurses() 
+{
+  if (curses_started) 
+    {
+      refresh();
+    }
+  else 
+    {
+      initscr();
+      cbreak();
+      echo();
+      intrflush(stdscr, false);
+      keypad(stdscr, true);
+      atexit(endCurses);
+      curses_started = true;
+    }
 }
 
 int main()

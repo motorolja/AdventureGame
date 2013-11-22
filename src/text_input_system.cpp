@@ -1,6 +1,6 @@
 #include "text_input_system.h"
 #include <cctype>
-#include <ncurses.h>
+#include <curses.h>
 
 InputMessage TextInputSystem::getData()
 {
