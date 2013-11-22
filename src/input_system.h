@@ -1,6 +1,7 @@
 #ifndef INPUT_SYSTEM_H
 #define INPUT_SYSTEM_H
 
+#include "command_parser.h"
 //#include "message.h"
 #include <vector>
 
@@ -9,15 +10,16 @@
 class InputSystem
 {
  public:
-  InputSystem();
+  InputSystem() = default;
   virtual ~InputSystem() noexcept
     {}
 
-  virtual InputMessage getData() const = 0; // pure virtual
+  virtual InputMessage getData() = 0; // pure virtual
 
- private:
+ protected:
   std::string m_command;
   std::vector<std::string> m_arguments;
+  CommandParser m_parser;
 };
 
 #endif

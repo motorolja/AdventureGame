@@ -1,10 +1,8 @@
-#include "command_parser.h"
-#include "input_system.h"
 #include "text_input_system.h"
 #include <cctype>
 #include <ncurses.h>
 
-InputMessage TextInputSystem::getData() const
+InputMessage TextInputSystem::getData()
 {
   m_command.clear();
   m_arguments.clear();// tömmer för att det alltid ska finnas senaste inmatningen
@@ -32,5 +30,5 @@ InputMessage TextInputSystem::getData() const
 	  m_arguments.push_back( temp );
 	}
     }
-  return CommandParser::getData(m_command,m_arguments);
+  return m_parser.getData(m_command,m_arguments);
 }

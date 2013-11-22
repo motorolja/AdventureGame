@@ -6,10 +6,9 @@
 class TextInputSystem : public InputSystem
 {
  public:
- TextInputSystem() : InputSystem()
-    {}
+  TextInputSystem() = default;
   
-  InputMessage getData() const;
+  InputMessage getData();
 
  private:
 };
