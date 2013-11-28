@@ -5,7 +5,7 @@ struct Position
 {
 public:
   int x,y;
-  Position(int, int);
+  Position(int _x = 0, int _y = 0);
   
   Position operator+ (Position&);
   Position operator- (Position&);
