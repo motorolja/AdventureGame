@@ -109,7 +109,7 @@ bool CommandParser::validArguments(std::vector<std::string>& arguments)
 
 InputMessage* CommandParser::getData(std::string& command, std::vector<std::string>& arguments)
 {
-  // InputMessage* msg = new InputMessage();
+  InputMessage* msg = new InputMessage();
   // om vi har ett giltligt kommando och argument
   if( validCommand(command) && validArguments(arguments) )
     {
