@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 
-//#include "message.h"
-#define InputMessage std::string
+#include "message.h"
+//#define InputMessage std::string
 
 class CommandParser
 {
@@ -26,7 +26,7 @@ class CommandParser
   //om kommandot har rätt antal argument och rätt typ
   bool validArguments(std::vector<std::string>& );
 
-  InputMessage getData(std::string&, std::vector<std::string>& );
+  InputMessage* getData(std::string&, std::vector<std::string>& );
 
  private:
   std::vector<std::string> m_command_table;

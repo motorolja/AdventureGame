@@ -1,7 +1,7 @@
 #include "text_input_system.h"
 #include <cctype>
 
-InputMessage TextInputSystem::getData()
+InputMessage* TextInputSystem::getData()
 {
   m_command.clear();
   m_arguments.clear();// tömmer för att det alltid ska finnas senaste inmatningen
