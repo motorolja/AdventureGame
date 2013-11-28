@@ -1,10 +1,7 @@
 #include "position.h"
 
-Position::Position()
-{
-  x = 0;
-  y = 0;
-}
+Position::Position(int _x = 0, int _y = 0): x(_x), y(_y)
+{}
 
 Position Position::operator + (Position& param)
 {

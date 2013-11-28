@@ -4,7 +4,7 @@
 struct Position
 {
 public:
-  Position();
+  Position(int, int);
   int x,y;
   
   Position operator + (Position&);
