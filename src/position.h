@@ -4,11 +4,14 @@
 struct Position
 {
 public:
-  Position(int, int);
   int x,y;
+  Position(int, int);
   
-  Position operator + (Position&);
-  Position operator - (Position&);
+  Position operator+ (Position&);
+  Position operator- (Position&);
+  bool operator< (Position&);
+  bool operator> (Position&);
+  bool operator== (Position&);
 };
 
 #endif
