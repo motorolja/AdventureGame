@@ -2,10 +2,6 @@
 #define INPUT_SYSTEM_H
 
 #include "command_parser.h"
-//#include "message.h"
-#include <vector>
-
-#define InputMessage std::string
 
 class InputSystem
 {

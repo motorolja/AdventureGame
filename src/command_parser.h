@@ -1,10 +1,10 @@
 #ifndef COMMAND_PARSER_H
 #define COMMAND_PARSER_H
 
-//#include "message.h"
 #include <vector>
 #include <string>
 
+//#include "message.h"
 #define InputMessage std::string
 
 class CommandParser
@@ -30,7 +30,7 @@ class CommandParser
 
  private:
   std::vector<std::string> m_command_table;
-  unsigned int m_command_index; // används för att hålla koll på vilket kommando som hittats
+  int m_command_index; // används för att hålla koll på vilket kommando som hittats, -1 om inget
 };
 
 #endif

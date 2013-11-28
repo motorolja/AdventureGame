@@ -76,6 +76,7 @@ bool CommandParser::validCommand(std::string& command)
 	  return true;
 	}
     }
+  m_command_index = -1; // -1 = inget kommando
   return false;
 }
 
@@ -108,12 +109,22 @@ bool CommandParser::validArguments(std::vector<std::string>& arguments)
 
 InputMessage CommandParser::getData(std::string& command, std::vector<std::string>& arguments)
 {
+  // InputMessage* msg = new InputMessage();
   // om vi har ett giltligt kommando och argument
   if( validCommand(command) && validArguments(arguments) )
     {
-      // hur vi ska struktuera inputmessage
+      //msg->validCommand( true );
       return "valid command"; // Test
     }
   else
-    return "invalid command"; // Test
+    {
+      //msg->validCommand( false );
+      return "invalid command"; // Test
+    }
+  /*
+    msg->setCommand( m_command_index );
+    for(int i = 0; i < arguments.size(); ++i )
+       msg->addArgument( arguments.at(i) );
+    return (*msg);
+  */
 }
