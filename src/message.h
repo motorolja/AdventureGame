@@ -6,7 +6,7 @@
 class BaseMessage
 {
 public:
-	enum eCommand{help=0, list, go, eat, throw, take, save, makeroom, make, delete, destroy, jump, rooms};
+	enum eCommand{unknown=-1, help=0, list, go, eat, throw, take, equip, attack, sleep, defend, save, makeroom, make, delete, destroy, jump, rooms, save};
 
 	BaseMessage(eCommand command);
 	virtual ~BaseMessage();
@@ -35,8 +35,14 @@ public:
 	virtual	~InputMessage();
 	
 	//InputMessage* setSpecialCommand(eSpecialCommand special_command);
+	InputMessage* setValid(bool valid);
 	
+	bool getValid() const
+	{
+		return m_valid;
+	}
 protected:
+	bool 						m_valid;
 	
 };
 
