@@ -14,7 +14,7 @@ enum eProperty
 class Item
 {
  public:
-  Item(std::string);
+  Item( std::string name = "no item");
 
   void addProperty(eProperty);
   void removeProperty(eProperty);

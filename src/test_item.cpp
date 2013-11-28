@@ -5,8 +5,9 @@ int main()
 {
   eProperty ed = edible;
   eProperty ju = junk;
-  Item invalid();
+  Item i;
   Item p("blingThing");
+  std::cout << i.getName() << std::endl;
   std::vector<eProperty> v;
   p.addProperty(ed);
   std::cout << "Lägger till: edible" << std::endl;
