@@ -12,26 +12,19 @@ lyckades eller inte).
 
 ännu inte färdig
 **/
-<<<<<<< HEAD
  static std::unordered_multimap<int,std::string> defaultstrings{
-{EngineMessage::help,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
-{EngineMessage::_list,"Your inventory: "}, //specialfall
-{EngineMessage::go,"You go <arg0>"}, // <arg0> är argumentet som ska kompletteras, ex: You go west
-=======
- std::unordered_multimap<int,std::string> defaultstrings{
-{EngineMessage::help,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
-{EngineMessage::_list,"Your inventory: "}, //specialfall
-{EngineMessage::go,"You go <arg0>"}, // <arg1> är argumentet som ska kompletteras, ex: You go west
->>>>>>> f9c5e86008b6560439f8a8bc9522fbdd9249b5ee
-{EngineMessage::go,"You can´t go that direction!"},
-{EngineMessage::eat,"You´re eating <arg0>"},
-{EngineMessage::eat,"You can´t eat That! You crazy?"},
-{EngineMessage::jump,"You jumped to (<arg0>,arg<1>)"},
-{EngineMessage::_throw,"You threw <arg0>"},
-{EngineMessage::_throw,"You can´t throw that item!"},
-{EngineMessage::take,"You got this item: <arg0>"},
-{EngineMessage::take,"You can´t take this item!"},
-{EngineMessage::unknown,"Invalid command"}// Default Message string
+{EngineMessage::chelp,"Player Commands: clist, cgo, ceat, cthrow, ctake, csave Create World: cmakeroom, cmake, cdelete, cdestroy, cjump, crooms"},
+{EngineMessage::clist,"Your inventory: "}, //specialfall
+{EngineMessage::cgo,"You go <arg0>"}, // <arg0> är argumentet som ska kompletteras, ex: You go west
+{EngineMessage::cgo,"You can´t go that direction!"},
+{EngineMessage::ceat,"You´re eating <arg0>"},
+{EngineMessage::ceat,"You can´t eat That! You crazy?"},
+{EngineMessage::cjump,"You jumped to (<arg0>,arg<1>)"},
+{EngineMessage::cthrow,"You threw <arg0>"},
+{EngineMessage::cthrow,"You can´t throw that item!"},
+{EngineMessage::ctake,"You got this item: <arg0>"},
+{EngineMessage::ctake,"You can´t take this item!"},
+{EngineMessage::cunknown,"Invalid command"}// Default Message string
 //{EngineMessage::none,"testing2"}
 };
 
