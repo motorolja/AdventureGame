@@ -1,6 +1,3 @@
-#ifndef TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-#define TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-
 #include "text_output_system.h"
 
 using namespace std;
@@ -87,6 +84,3 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
 }
 
 
-
-
-#endif // TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
