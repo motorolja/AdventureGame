@@ -1,6 +1,6 @@
 #include "engine.h"
 
-Engine::Engine()
+Engine::Engine(bool godmode) : m_godmode(godmode)
 {
 	m_enginemessage = nullptr;
 	m_inputmessage  = nullptr;
@@ -36,6 +36,67 @@ bool Engine::update()
 			switch(m_inputmessage->getCommand())
 			{
 				case cunknown:
+				break;
+				case chelp:
+				break;
+				case clist:
+				break;
+				case cgo:
+					//
+				break;
+				case ceat:
+					//
+				break;
+				case cthrow:
+					//
+				break;
+				case ctake:
+					//
+				break;
+				case csave:
+					if(m_godmode)
+					{
+					}
+					else
+					{
+					}
+					//
+				break;
+				case cmakeroom:
+					if(m_godmode)
+					{
+					}
+					//
+				break;
+				case cmake:
+					if(m_godmode)
+					{
+					}
+					//
+				break;
+				case cdelete:
+					if(m_godmode)
+					{
+					}
+					//
+				break;
+				case cdestroy:
+					if(m_godmode)
+					{
+					}
+					//
+				break;
+				case cjump:
+					if(m_godmode)
+					{
+					}
+					//
+				break;
+				case crooms:
+					if(m_godmode)
+					{
+					}
+					//
 				break;
 				default:
 				break;

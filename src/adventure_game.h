@@ -8,7 +8,7 @@
 class AdventureGame
 {
 public:
-	AdventureGame();
+	AdventureGame(int argc, char*argv[]);
 	~AdventureGame();
 	
 	void Run();

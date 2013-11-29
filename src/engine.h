@@ -8,7 +8,7 @@
 class Engine
 {
 public:
-	Engine();
+	Engine(bool godmode = false);
 	~Engine();
 	//enum eEngineStatus{};
 	EngineMessage* setOutput() const
