@@ -1,29 +1,27 @@
-#ifndef TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-#define TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-
 #include <iostream>
 #include "text_output_system.h"
 #include <string>
 #include <algorithm>
+//#include <ncurses.h>
 using namespace std;
 
 void TextOutputSystem::writeOutput()
 {
-    std::string def_string = getDefstring();
-    std::string res = completeString(def_string);
+  std::string def_string = getDefstring();
+  std::string res = completeString(def_string);
 
-    //skriv ut
+  //skriv ut
 
-    // cout<<res;
-    printw(res.c_str());
-    printw("\n>>");
-    refresh();
-    getch();
+  // cout<<res;
+  printw(res.c_str());
+  printw("\n>>");
+  refresh();
+  getch();
 
-    }
+}
 
 std::string TextOutputSystem::getDefstring() const
-    {
+{
   string res;
   auto range = m_defaultstrings.equal_range( m_message->getCommand() ); //range = pair<const unordered_multimap<int,string>::iterator, const unordered_multimap<int,string>::iterator>
 
@@ -51,47 +49,43 @@ std::string TextOutputSystem::getDefstring() const
 
   }
   return res;
-    }
+}
 
 //INTE färdig!!
 std::string TextOutputSystem::completeString( const std::string& defstring)
-    {
-    std::string _complete_string = defstring;
-    string temp;
+{
+  std::string _complete_string = defstring;
+  string temp;
 
-    //Utmatingssträng för kommando: list
-    if(m_message->getCommand() == EngineMessage::_list)
+  //Utmatingssträng för kommando: list
+  if(m_message->getCommand() == EngineMessage::_list)
     {
-     for(auto i : m_message->getPlayer().getInventory())
-       {
-            temp = " " + i->getName();
-            _complete_string.append(temp);
-       }
+      for(auto i : m_message->getPlayer().getInventory())
+	{
+	  temp = " " + i->getName();
+	  _complete_string.append(temp);
+	}
     }
 
-    else
+  else
     {
-        vector<string> args = m_message->getArguments();
-        for(int i = 0; i < args.size(); ++i)
+      vector<string> args = m_message->getArguments();
+      for(int i = 0; i < args.size(); ++i)
         {
-            temp = "<arg";
-            temp += (std::to_string(i) + ">");
+	  temp = "<arg";
+	  temp += (std::to_string(i) + ">");
 
-            size_t pos = _complete_string.find(temp);
+	  size_t pos = _complete_string.find(temp);
 
-            //Är vi säkra på att den kommer att finnas? Behöver vi kolla detta?
-            if(pos != string::npos)
+	  //Är vi säkra på att den kommer att finnas? Behöver vi kolla detta?
+	  if(pos != string::npos)
             {
-                _complete_string.replace(pos,temp.length(),args.at(i));
+	      _complete_string.replace(pos,temp.length(),args.at(i));
             }
 
         }
     }
 
-    return _complete_string;
+  return _complete_string;
 }
 
-
-
-
-#endif // TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
