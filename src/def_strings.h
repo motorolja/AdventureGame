@@ -12,10 +12,10 @@ lyckades eller inte).
 
 ännu inte färdig
 **/
- std::unordered_multimap<int,std::string> defaultstrings{
+ static std::unordered_multimap<int,std::string> defaultstrings{
 {EngineMessage::help,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
 {EngineMessage::_list,"Your inventory: "}, //specialfall
-{EngineMessage::go,"You go <arg0>"}, // <arg1> är argumentet som ska kompletteras, ex: You go west
+{EngineMessage::go,"You go <arg0>"}, // <arg0> är argumentet som ska kompletteras, ex: You go west
 {EngineMessage::go,"You can´t go that direction!"},
 {EngineMessage::eat,"You´re eating <arg0>"},
 {EngineMessage::eat,"You can´t eat That! You crazy?"},

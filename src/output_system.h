@@ -13,7 +13,7 @@ class OutputSystem
   virtual ~OutputSystem() noexcept = default; /*{delete m_message;}*/
 
   virtual void writeOutput() = 0;
-  virtual void retrieveOutput(const EngineMessage& ) = 0;
+  virtual void retrieveOutput(EngineMessage* ) = 0;
 
  protected:
     OutputSystem() : m_message(nullptr){}

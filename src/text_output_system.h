@@ -3,22 +3,23 @@
 
 #include "output_system.h"
 #include <string>
-
+#include "curses.h"
 class TextOutputSystem : public OutputSystem
 {
     public:
-    virtual ~TextOutputSystem() noexcept { /*endwin();*/}
+    virtual ~TextOutputSystem() noexcept { endwin();}
     TextOutputSystem() : OutputSystem() , m_defaultstrings(defaultstrings)
     {
-      /*initscr();                                 // initsierar screen
+      initscr();                                 // initsierar screen
       printw("Welcome to the Adventure Game");
+      printw("\n");
       scrollok(stdscr,TRUE);
-      refresh();*/
+      refresh();
 
         }
 
-    void writeOutput();
-    void retrieveOutput(EngineMessage* message) { m_message = message;}
+    virtual void writeOutput();
+    virtual void retrieveOutput(EngineMessage* message) { m_message = message;}
     std::string completeString( const std::string& );
     private:
     std::string getDefstring() const ;
