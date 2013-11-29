@@ -2,13 +2,15 @@
 #define MESSAGE_H
 #include <vector>
 #include <string>
+#include "player.h"
+#include "room.h"
 
 class BaseMessage
 {
 public:
 	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms};
 
-	BaseMessage(eCommand command);
+	BaseMessage(eCommand command = cunknown);
 	virtual ~BaseMessage();
 	
 	BaseMessage* setCommand(eCommand command);
@@ -30,19 +32,14 @@ protected:
 class InputMessage : public BaseMessage
 {
 public:
-	InputMessage(eCommand command);
+	InputMessage(eCommand command = cunknown);
 	virtual	~InputMessage();
 	
-	InputMessage* setSpecialCommand(eSpecialCommand special_command);
 	InputMessage* setValid(bool valid);
 	
 	bool getValid() const
 	{
 		return m_valid;
-	}
-	eSpecialCommand getSpecialCommand() const
-	{
-		return m_specialcommand;
 	}
 protected:
 	bool 						m_valid;
@@ -53,7 +50,7 @@ class EngineMessage : public BaseMessage
 {
 public:
 	enum eOutputCommand{ocnone=0, ocgamestart, ocgamestop, ocload, ocsave};
-	EngineMessage(eCommand command);
+	EngineMessage(eCommand command = cunknown);
 	virtual ~EngineMessage();
 	
 	EngineMessage* setSuccess(bool success);
