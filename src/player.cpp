@@ -57,13 +57,12 @@ void Player::addItem(Item* item)
 
 void Player::removeItem(int index)
 {
-    if(index > 0 && index < m_inventory.size())
+    if(index >= 0 && index < m_inventory.size())
     {
-        delete m_inventory[index];
-        m_inventory.erase(m_inventory.begin()+index);
+      delete m_inventory.at(index);
+      m_inventory.erase(m_inventory.begin()+index);
     }
-    else
-    std::cout << "the item did not exist(exception)!\n";
+    // kanske kasta ett exception om föremålet inte fanns
 }
 
 std::vector<Item*> Player::getInventory()
