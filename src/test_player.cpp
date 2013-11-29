@@ -7,30 +7,37 @@ using namespace std;
 
 int main()
 {
-    Item* item = new Item(123456789);
-    Position pos = 22;
-    Status status = 9;
-    Player p(7 ,pos);
+    Item* item = new Item("blingThing");
+    Position pos(3,8);
+    Status status(poisoned, 5);
+    Player p(10, pos);
     
     cout << "Health: " << p.getHealth() 
-        << ", Position: " << p.getPosition()
+	 << ", Position: " << pos.x << "," << pos.y 
         << endl;
 
     p.addStatus(status);
-    p.clearStatus();
     
-    pos = 3;
-    p.setPosition(pos);
-    cout << "Position: " << p.getPosition()
+    Position pos2(1,3);
+    p.setPosition(pos2);
+    cout << "Position: " << pos2.x << "," << pos2.y 
         << endl;
     
+    pos = p.getPosition();
+    cout << "Position: " << pos.x << "," << pos.y 
+        << endl;
+
     for( int i = 0; i < 7; ++i )
         p.update();
-        
+    cout << "Health: " << p.getHealth() << endl;    
+
     p.setHealth(88);
     cout << "Health: " << p.getHealth() << endl;
-    p.setHealth(5);
-    for(int i=0;i<6;++i)
+
+    Status sta2(poisoned, 10);
+    p.addStatus(sta2);
+    p.setHealth(100);
+    for(int i=0;i<30;++i)
     {
 	p.update();
 	cout << "Health: " << p.getHealth() << endl;
@@ -38,18 +45,18 @@ int main()
     
     vector<Item*> temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << (*it) << endl;
+        cout << "Item: " << endl;
     p.removeItem(-1);
     p.removeItem(100);
     p.removeItem(2);
     p.removeItem(1);
     temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << (*it) << endl;
+        cout << "Item: " << endl;
     p.removeItem(0);
     temp = p.getInventory();
     for(Item* it : temp)
-        cout << "Item: " << (*it) << endl;
+        cout << "Item: " << endl;
     
     
   return 0;

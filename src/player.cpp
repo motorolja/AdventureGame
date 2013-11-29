@@ -1,12 +1,12 @@
 #include <iostream>
 #include "player.h"
 
-Player::Player(int starting_health = 10, Position starting_position = 0)
+Status::Status(eStatus status, unsigned short duration): m_status(status), m_duration(duration)
+{}
+
+Player::Player(int starting_health, Position starting_position)
 : m_health(starting_health), m_position(starting_position)
-{
-    Item* leet = new Item(1337);
-    addItem( leet );
-}
+{}
 
 Player::~Player()
 {
@@ -63,7 +63,7 @@ void Player::removeItem(int index)
         m_inventory.erase(m_inventory.begin()+index);
     }
     else
-    std::cout << "the item did not excist(exception)!\n";
+    std::cout << "the item did not exist(exception)!\n";
 }
 
 std::vector<Item*> Player::getInventory()
@@ -76,14 +76,13 @@ std::vector<Item*> Player::getInventory()
 
 void Player::update()
 {
-    //spelarens logik ligger här i
-    if(m_health <= 0)
-        std::cout << "You were killed unexpectedly :)\n"; // TEST
-    else
+  for(int i = 0; i < m_statuses.size(); ++i)
     {
-        //olika beteenden beroende på statusar här
-        --m_health;
-        if(m_health == 0)
-            std::cout << "You are now dead, as expected :)\n"; // TEST
+      --m_statuses.at(i).m_duration;
+      if( m_statuses.at(i).m_duration == 0 )
+	m_statuses.erase(m_statuses.begin() + i);
+      else if( m_statuses.at(i).m_status == eStatus(poisoned) )
+	--m_health;
     }
+  --m_health;
 }

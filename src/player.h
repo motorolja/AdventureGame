@@ -2,18 +2,26 @@
 #define PLAYER_H
 
 #include <vector>
-//#include "item.h"
-//#include "status.h"
-//#include "position.h"
+#include "item.h"
+#include "position.h"
 
-#define Item int
-#define Status int
-#define Position int
+enum eStatus
+  {
+    poisoned
+  };
+
+struct Status
+{
+  Status(eStatus, unsigned short );
+  eStatus m_status;
+  unsigned short m_duration;
+};
+
 
 class Player
 {
 public:
-    Player(int, Position);
+  Player(int starting_health = 10, Position starting_position = Position(0,0) );
     ~Player();
     
     int getHealth() const;
