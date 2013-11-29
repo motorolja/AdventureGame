@@ -6,7 +6,7 @@
 class BaseMessage
 {
 public:
-	enum eCommand{unknown=-1, help=0, list, go, eat, throw, take, equip, attack, sleep, defend, save, makeroom, make, delete, destroy, jump, rooms, save};
+	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms, csave};
 
 	BaseMessage(eCommand command);
 	virtual ~BaseMessage();
@@ -30,16 +30,19 @@ protected:
 class InputMessage : public BaseMessage
 {
 public:
-	//enum eSpecialCommand{load=0};
 	InputMessage(eCommand command);
 	virtual	~InputMessage();
 	
-	//InputMessage* setSpecialCommand(eSpecialCommand special_command);
+	InputMessage* setSpecialCommand(eSpecialCommand special_command);
 	InputMessage* setValid(bool valid);
 	
 	bool getValid() const
 	{
 		return m_valid;
+	}
+	eSpecialCommand getSpecialCommand() const
+	{
+		return m_specialcommand;
 	}
 protected:
 	bool 						m_valid;
@@ -49,11 +52,18 @@ protected:
 class EngineMessage : public BaseMessage
 {
 public:
+	enum eOutputCommand{ocnone=0, ocgamestart, ocgamestop, ocload, ocsave};
 	EngineMessage(eCommand command);
 	virtual ~EngineMessage();
 	
 	EngineMessage* setSuccess(bool success);
+	EngineMessage* setOutputCommand(eOutputCommand);
+	EngineMessage* addOutputArgument(std::string argument);
 	
+	std::vector<std::string> getOutputArguments() const
+	{
+		return m_outputarguments;
+	}
 	bool getSuccess() const
 	{
 		return m_success;
@@ -66,7 +76,13 @@ public:
 	{
 		return m_room;
 	}
+	eOutputCommand getOutputCommand() const
+	{
+		return m_outputcommand;
+	}
 protected:
+	std::vector<std::string>    m_outputarguments;
+	eOutputCommand				m_outputcommand;
 	bool 						m_success;
 	Player 						m_player;
 	Room 						m_room;
