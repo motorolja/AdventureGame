@@ -37,7 +37,7 @@ int main()
     p.setHealth(88);
     cout << "Health: " << p.getHealth() << endl;
 
-    Status sta2(poisoned, 10);// 9 st gånger --2
+    Status sta2(poisoned, 10);
     p.addStatus(sta2);
     p.setHealth(100);
     for(int i=0;i<30;++i)
@@ -52,9 +52,7 @@ int main()
     vector<Item*> temp = p.getInventory();
     for(Item* it : temp)
       cout << "Item: " << it->getName() << endl;
-    p.removeItem(-1);
-    p.removeItem(100);
-    p.removeItem(2);
+
     p.removeItem(1);
     // bara ett item kvar nu "blingThing"
     temp = p.getInventory();
@@ -65,6 +63,8 @@ int main()
     for(Item* it : temp)
         cout << "Item: " << it->getName() << endl;
     
+    // kastar ett exception sist, out of range
+    p.removeItem(2);
     
   return 0;
 }

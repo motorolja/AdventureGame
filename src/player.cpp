@@ -1,5 +1,7 @@
 #include <iostream>
 #include "player.h"
+#include <algorithm>
+#include <stdexcept>
 
 Status::Status(eStatus status, unsigned short duration): m_status(status), m_duration(duration)
 {}
@@ -57,12 +59,14 @@ void Player::addItem(Item* item)
 
 void Player::removeItem(int index)
 {
-    if(index >= 0 && index < m_inventory.size())
+  if(index >= 0 && index < m_inventory.size())
     {
       delete m_inventory.at(index);
       m_inventory.erase(m_inventory.begin()+index);
     }
-    // kanske kasta ett exception om föremålet inte fanns
+  else
+      throw std::out_of_range("Player::removeItem: No item to remove");
+  // kanske kasta ett exception om föremålet inte fanns
 }
 
 std::vector<Item*> Player::getInventory()
@@ -75,13 +79,25 @@ std::vector<Item*> Player::getInventory()
 
 void Player::update()
 {
-  for(int i = 0; i < m_statuses.size(); ++i)
+  // tar bort de element som har m_duration == 0
+  m_statuses.erase( std::remove_if(m_statuses.begin(), m_statuses.end(),
+				   [](Status s) -> bool{return s.m_duration == 0;} )
+		    , m_statuses.end() );
+  
+  for( int i = 0; i < m_statuses.size(); i++ )
     {
-      --m_statuses.at(i).m_duration;
-      if( m_statuses.at(i).m_duration == 0 )
-	m_statuses.erase(m_statuses.begin() + i);
-      else if( m_statuses.at(i).m_status == eStatus(poisoned) )
-	--m_health;
+      switch ( m_statuses.at(i).m_status )
+	{
+	case poisoned:
+	  --m_health;
+	  break;
+	default:
+	  break;
+	}
     }
+
+  for( int i = 0; i < m_statuses.size(); ++i )
+      --m_statuses.at(i).m_duration;
+
   --m_health;
 }
