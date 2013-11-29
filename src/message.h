@@ -2,6 +2,8 @@
 #define MESSAGE_H
 #include <vector>
 #include <string>
+#include "player.h"
+#include "room.h"
 
 class BaseMessage
 {
@@ -33,16 +35,11 @@ public:
 	InputMessage(eCommand command);
 	virtual	~InputMessage();
 	
-	InputMessage* setSpecialCommand(eSpecialCommand special_command);
 	InputMessage* setValid(bool valid);
 	
 	bool getValid() const
 	{
 		return m_valid;
-	}
-	eSpecialCommand getSpecialCommand() const
-	{
-		return m_specialcommand;
 	}
 protected:
 	bool 						m_valid;
