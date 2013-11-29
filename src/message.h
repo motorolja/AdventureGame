@@ -6,7 +6,7 @@
 class BaseMessage
 {
 public:
-	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms, csave};
+	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms};
 
 	BaseMessage(eCommand command);
 	virtual ~BaseMessage();
