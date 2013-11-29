@@ -27,14 +27,14 @@ void AdventureGame::Update()
 {
 	InputMessage* imessage = input->getData();
 	engine->setInput( imessage );
-	//engine->update();
-	/*
-		Uppdatera Engine och ta reda på m_running!
-	*/
+	//Uppdatera Engine och ta reda på m_running!
+	m_running = engine->update();
 	delete imessage;
+	imessage = nullptr;
 	
 	EngineMessage* emessage = engine->getOutput();
 	output->retrieveOutput( emessage );
 	output->writeOutput();
 	delete emessage;
+	emessage = nullptr;
 }
