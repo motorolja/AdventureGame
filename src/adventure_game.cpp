@@ -1,10 +1,20 @@
 #include "adventure_game.h"
 
-AdventureGame::AdventureGame()
+AdventureGame::AdventureGame(int argc, char*argv[])
 {
+	bool god_mode = false;
+	if(argc >= 1)
+	{
+		if(argv[1] == "-god")
+			god_mode = true;
+	}
+	if(argc >= 2)
+	{
+		//load the game from file
+	}
 	input = new TextInputSystem();
 	output = new TextOutputSystem();
-	engnie = new Engine();
+	engnie = new Engine(god_mode);
 	m_running = true;
 }
 
