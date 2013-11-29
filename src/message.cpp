@@ -18,7 +18,7 @@ BaseMessage* BaseMessage::setCommand(eCommand command)
 
 BaseMessage* BaseMessage::addArgument(std::string argument)
 {
-	arguments.push_back( argument );
+	m_arguments.push_back( argument );
 	return this;
 }
 
