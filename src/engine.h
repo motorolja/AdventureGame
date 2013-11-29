@@ -11,10 +11,15 @@ public:
 	Engine();
 	~Engine();
 	//enum eEngineStatus{};
+	EngineMessage* setOutput() const
+	{
+		return m_enginemessage;
+	}
+	
 	void 			setInput(InputMessage* input_message);
-	EngineMessage* 	getOutput();
 	bool 			update();
 private:
+	bool			m_running;
 	EngineMessage*	m_enginemessage;	//temporär lagring
 	InputMessage*	m_inputmessage;		//temporär lagring
 	bool 			m_godmode;
