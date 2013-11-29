@@ -50,7 +50,8 @@ EngineMessage::~EngineMessage()
 {
 }
 
-EngineMessage* EngineMessage::EngineMessage(bool success)
+EngineMessage* EngineMessage::setSuccess(bool success)
 {
 	m_success = success;
+	return this;
 }
