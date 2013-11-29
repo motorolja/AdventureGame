@@ -121,9 +121,10 @@ InputMessage* CommandParser::getData(std::string& command, std::vector<std::stri
       msg->setValid( false );
       //return "invalid command"; // Test
     }
-  
-    msg->setCommand( m_command_index );
-    for(int i = 0; i < arguments.size(); ++i )
-       msg->addArgument( arguments.at(i) );
-    return msg;
+  if( m_command_index == 17 )// för det finns 2 olika saves
+    m_command_index = 10;
+  msg->setCommand( m_command_index );
+  for(int i = 0; i < arguments.size(); ++i )
+    msg->addArgument( arguments.at(i) );
+  return msg;
 }

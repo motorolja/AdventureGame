@@ -32,10 +32,10 @@ int main()
 {
   TextInputSystem s;
   startCurses();
-  InputMessage i = s.getData();
+  InputMessage* i = s.getData();
   endCurses();
   
-  std::cout << i << std::endl;
+  std::cout << std::endl;
   
   return 0;
 }
