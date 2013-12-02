@@ -5,7 +5,7 @@
 CCC	= g++ -std=c++11
 LFLAGS	= -lncurses
 
-all: text_adventure_game input_test
+all: text_adventure_game input_test player_test
 
 text_adventure_game: main.cpp adventure_game.o
 	$(CCC) -o text_adventure_game main.cpp adventure_game.o input.o output.o engine.o message.o room.o player.o position.o text_input_system.o command_parser.o $(LFLAGS)
