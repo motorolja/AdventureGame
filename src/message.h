@@ -49,18 +49,14 @@ protected:
 class EngineMessage : public BaseMessage
 {
 public:
-	enum eOutputCommand{ocnone=0, ocgamestart, ocgamestop, ocload, ocsave};
+	//enum eOutputCommand{ocnone=0, ocgamestart, ocgamestop, ocload, ocsave};
 	EngineMessage(eCommand command = cunknown);
 	virtual ~EngineMessage();
 	
 	EngineMessage* setSuccess(bool success);
-	EngineMessage* setOutputCommand(eOutputCommand);
-	EngineMessage* addOutputArgument(std::string argument);
+	EngineMessage* setPlayer(Player player);
+	EngineMessage* setRoom(Room room);
 	
-	std::vector<std::string> getOutputArguments() const
-	{
-		return m_outputarguments;
-	}
 	bool getSuccess() const
 	{
 		return m_success;
@@ -72,10 +68,6 @@ public:
 	Room getRoom() const
 	{
 		return m_room;
-	}
-	eOutputCommand getOutputCommand() const
-	{
-		return m_outputcommand;
 	}
 protected:
 	std::vector<std::string>    m_outputarguments;
