@@ -22,14 +22,14 @@ void Player::setHealth(int health)
 
 void Player::addStatus(Status status)
 {
-    //lägg till koll om statusen redan finns
+    //lï¿½gg till koll om statusen redan finns
     m_statuses.push_back(status);
 }
 
 void Player::clearStatus()
 {
     //ta bort hela status vektorn
-    m_statuses.clear();    // "Status" innehåller inte pekare
+    m_statuses.clear();    // "Status" innehï¿½ller inte pekare
 }
 
 void Player::setPosition(Position position)
@@ -53,7 +53,7 @@ void Player::removeItem(int index)
       m_inventory.erase(m_inventory.begin()+index);
   else
       throw std::out_of_range("Player::removeItem: No item to remove");
-  // kanske kasta ett exception om föremålet inte fanns
+  // kanske kasta ett exception om fï¿½remï¿½let inte fanns
 }
 
 std::vector<Item> Player::getInventory()
@@ -73,7 +73,8 @@ void Player::update()
       switch ( m_statuses.at(i).m_status )
 	{
 	case poisoned:
-	  --m_health;
+	  if(m_health >= 1)
+	    --m_health;
 	  break;
 	default:
 	  break;
@@ -83,5 +84,6 @@ void Player::update()
   for( int i = 0; i < m_statuses.size(); ++i )
       --m_statuses.at(i).m_duration;
 
-  --m_health;
+  if( m_health != 0 )
+    --m_health;
 }
