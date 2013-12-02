@@ -1,5 +1,7 @@
 #include "engine.h"
 
+using namespace std;
+
 Engine::Engine(bool godmode) : m_godmode(godmode)
 {
 	m_enginemessage = nullptr;
@@ -31,6 +33,8 @@ bool Engine::update()
 		//begin constructing EngineMessage here
 		m_enginemessage = new EngineMessage( m_inputmessage->getCommand() );
 		
+		vector<string> args = m_inputmessage->getArguments();
+		
 		if(m_inputmessage->getValid() == true)
 		{
 			switch(m_inputmessage->getCommand())
@@ -38,8 +42,10 @@ bool Engine::update()
 				case cunknown:
 				break;
 				case chelp:
+					m_enginemessage->setSuccess( true );
 				break;
 				case clist:
+					m_enginemessage->setSuccess( true );
 				break;
 				case cgo:
 					//
@@ -56,46 +62,93 @@ bool Engine::update()
 				case csave:
 					if(m_godmode)
 					{
+						if(args.size() == 1)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
 					else
 					{
+						if(args.size() == 0)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
 					//
 				break;
 				case cmakeroom:
 					if(m_godmode)
 					{
+						if(args.size() == 3)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				case cmake:
 					if(m_godmode)
 					{
+						if(args.size() >= 1)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				case cdelete:
 					if(m_godmode)
 					{
+						if(args.size() == 1)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				case cdestroy:
 					if(m_godmode)
 					{
+						if(args.size() == 1)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				case cjump:
 					if(m_godmode)
 					{
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				case crooms:
 					if(m_godmode)
 					{
+						if(args.size() == 0)
+						{
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
+					else
+						m_enginemessage->setSuccess( false );
 					//
 				break;
 				default:
@@ -107,6 +160,8 @@ bool Engine::update()
 			//hantera invalid command
 			m_enginemessage->setSuccess( false );
 		}
+		//set resulting player and room
+		m_enginemessage-> setPlayer( m_player )-> setRoom( m_room );
 	}
 	return m_running;
 }

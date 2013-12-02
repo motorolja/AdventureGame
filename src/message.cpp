@@ -50,6 +50,18 @@ EngineMessage::~EngineMessage()
 {
 }
 
+EngineMessage* EngineMessage::setPlayer(Player player)
+{
+	m_player = player;
+	return this;
+}
+
+EngineMessage* EngineMessage::setRoom(Room room)
+{
+	m_room = room;
+	return this;
+}
+
 EngineMessage* EngineMessage::setSuccess(bool success)
 {
 	m_success = success;
