@@ -10,16 +10,6 @@ Player::Player(int starting_health, Position starting_position)
 : m_health(starting_health), m_position(starting_position)
 {}
 
-Player::~Player()
-{
-    //ta bort vektorer
-    for(auto it = m_inventory.begin(); it != m_inventory.end(); it++)
-    {
-        delete *it;
-    } 
-    m_inventory.clear();
-}
-
 int Player::getHealth() const
 {
     return m_health;
@@ -52,7 +42,7 @@ Position Player::getPosition() const
     return m_position;
 }
 
-void Player::addItem(Item* item)
+void Player::addItem(Item item)
 {
     m_inventory.push_back(item);
 }
@@ -60,21 +50,15 @@ void Player::addItem(Item* item)
 void Player::removeItem(int index)
 {
   if(index >= 0 && index < m_inventory.size())
-    {
-      delete m_inventory.at(index);
       m_inventory.erase(m_inventory.begin()+index);
-    }
   else
       throw std::out_of_range("Player::removeItem: No item to remove");
   // kanske kasta ett exception om föremålet inte fanns
 }
 
-std::vector<Item*> Player::getInventory()
+std::vector<Item> Player::getInventory()
 {
-    std::vector<Item*> result;
-    for(Item* it : m_inventory)
-        result.push_back(it);
-    return result;
+    return m_inventory;
 }
 
 void Player::update()

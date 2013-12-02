@@ -10,6 +10,9 @@ all: text_adventure_game input_test
 text_adventure_game: main.cpp adventure_game.o
 	$(CCC) -o text_adventure_game main.cpp adventure_game.o input.o output.o engine.o message.o room.o player.o position.o text_input_system.o command_parser.o $(LFLAGS)
 
+player_test: test_player.cpp player.o item.o position.o
+	$(CCC) -o player_test test_player.cpp player.o item.o position.o
+
 input_test: test_text_system_input.cpp message.o room.o player.o position.o text_input_system.o command_parser.o
 	$(CCC) -o input_test test_text_system_input.cpp message.o room.o player.o position.o text_input_system.o command_parser.o $(LFLAGS)
 

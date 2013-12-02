@@ -22,14 +22,13 @@ class Player
 {
 public:
   Player(int starting_health = 10, Position starting_position = Position(0,0) );
-    ~Player();
     
     int getHealth() const;
     void setHealth(int);
     
-    void addItem(Item*);
+    void addItem(Item);
     void removeItem(int index);
-    std::vector<Item*> getInventory();
+    std::vector<Item> getInventory();
     
     void addStatus(Status);
     void clearStatus();
