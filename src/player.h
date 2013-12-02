@@ -39,7 +39,7 @@ public:
     
     void update();
 private:
-    std::vector<Item*> m_inventory;
+    std::vector<Item> m_inventory;
     std::vector<Status> m_statuses;
     unsigned int m_health;
     Position m_position;
