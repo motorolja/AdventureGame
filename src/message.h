@@ -8,7 +8,7 @@
 class BaseMessage
 {
 public:
-	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms};
+	enum eCommand{cunknown=-1, chelp=0, clist, cgo, ceat, cthrow, ctake, cequip, cattack, csleep, cdefend, csave, cmakeroom, cmake, cdelete, cdestroy, cjump, crooms, oload};
 
 	BaseMessage(eCommand command = cunknown);
 	virtual ~BaseMessage();
@@ -56,7 +56,12 @@ public:
 	EngineMessage* setSuccess(bool success);
 	EngineMessage* setPlayer(Player player);
 	EngineMessage* setRoom(Room room);
+	EngineMessage* setGod(bool godmode);
 	
+	bool getGod() const
+	{
+		return m_godmode;
+	}
 	bool getSuccess() const
 	{
 		return m_success;
@@ -73,6 +78,7 @@ protected:
 	std::vector<std::string>    m_outputarguments;
 	eOutputCommand				m_outputcommand;
 	bool 						m_success;
+	bool						m_godmode;
 	Player 						m_player;
 	Room 						m_room;
 };

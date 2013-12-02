@@ -4,6 +4,7 @@
 #include "text_ouput_system.h"
 #include "text_input_system.h"
 #include "engine.h"
+#include <string>
 
 class AdventureGame
 {

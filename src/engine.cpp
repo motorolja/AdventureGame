@@ -39,6 +39,9 @@ bool Engine::update()
 		{
 			switch(m_inputmessage->getCommand())
 			{
+				case oload: //this should never come from TextInputSystem
+					//
+				break;
 				case cunknown:
 				break;
 				case chelp:
@@ -48,6 +51,7 @@ bool Engine::update()
 					m_enginemessage->setSuccess( true );
 				break;
 				case cgo:
+					
 					//
 				break;
 				case ceat:
@@ -161,7 +165,7 @@ bool Engine::update()
 			m_enginemessage->setSuccess( false );
 		}
 		//set resulting player and room
-		m_enginemessage-> setPlayer( m_player )-> setRoom( m_room );
+		m_enginemessage-> setPlayer( m_player )-> setRoom( m_room ) -> setGod( m_godmode );
 	}
 	return m_running;
 }

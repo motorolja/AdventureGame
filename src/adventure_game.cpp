@@ -1,21 +1,27 @@
 #include "adventure_game.h"
 
+using namespace std;
+
 AdventureGame::AdventureGame(int argc, char*argv[])
 {
 	bool god_mode = false;
-	if(argc >= 1)
+	if(argc == 3)
 	{
-		if(argv[1] == "-god")
+		if(argv[2] == "-god")
 			god_mode = true;
-	}
-	if(argc >= 2)
-	{
-		//load the game from file
 	}
 	input = new TextInputSystem();
 	output = new TextOutputSystem();
 	engnie = new Engine(god_mode);
 	m_running = true;
+	
+	if(argc >= 2)
+	{
+		InputMessage* im = new InputMessage(oload);
+		im->addArgumnet(/* argv[2] eller något */)-> setValid( true );
+		engine->setInput( im );
+		engine->update();
+	}
 }
 
 AdventureGame::~AdventureGame()
