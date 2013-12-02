@@ -35,7 +35,14 @@ int main()
   InputMessage* i = s.getData();
   endCurses();
   
-  std::cout << std::endl;
+  std::vector<std::string> temp = i->getArguments();
+  std::cout << i->getCommand() << std::endl;
+  for( int i = 0; i < temp.size(); ++i )
+    std::cout << temp.at(i) << std::endl;
+  if( i->getValid() )
+    std::cout << "Valid command\n";
+  else
+    std::cout << "Invalid command\n";
   
   return 0;
 }
