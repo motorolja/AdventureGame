@@ -3,6 +3,7 @@
 
 #include "output_system.h"
 #include <unordered_map>
+#include "message.h"
 #include <string>
 #include "curses.h"
 class TextOutputSystem : public OutputSystem
@@ -27,19 +28,31 @@ class TextOutputSystem : public OutputSystem
 
   //std::unordered_multimap<int,std::string> m_defaultstrings;
   const std::unordered_multimap<int,std::string> m_defaultstrings{
-    {EngineMessage::help,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
-    {EngineMessage::_list,"Your inventory: "}, //specialfall
-	{EngineMessage::go,"You go <arg0>"}, // <arg0> är argumentet som ska kompletteras, ex: You go west
-    {EngineMessage::go,"You can´t go that direction!"},
-    {EngineMessage::eat,"You´re eating <arg0>"},
-    {EngineMessage::eat,"You can´t eat That! You crazy?"},
-    {EngineMessage::jump,"You jumped to (<arg0>,arg<1>)"},
-    {EngineMessage::_throw,"You threw <arg0>"},
-    {EngineMessage::_throw,"You can´t throw that item!"},
-    {EngineMessage::take,"You got this item: <arg0>"},
-    {EngineMessage::take,"You can´t take this item!"},
-    {EngineMessage::unknown,"Invalid command"}// Default Message string
-			  //{EngineMessage::none,"testing2"}
+    {EngineMessage::cunknown,"Invalid command"},// Default Message string
+    {EngineMessage::chelp,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
+    {EngineMessage::clist,"Your inventory: "}, //specialfall
+    {EngineMessage::cgo,"You go"}, // <arg0> Ã¤r argumentet som ska kompletteras, ex: You go west
+    {EngineMessage::cgo,"You canÂ´t go that direction!"},
+    {EngineMessage::ceat,"YouÂ´re eating"},
+    {EngineMessage::ceat,"You canÂ´t eat That! You crazy?"},
+    {EngineMessage::cthrow,"You threw"},
+    {EngineMessage::cthrow,"You canÂ´t throw that item!"},
+    {EngineMessage::ctake,"You got this item:"},
+    {EngineMessage::ctake,"You canÂ´t take this item!"},
+    {EngineMessage::csave,"You have saved your game!"},
+    {EngineMessage::csave,"You canÂ´t save now!"},
+    {EngineMessage::cmakeroom,"You created the room:"},
+    {EngineMessage::cmakeroom,"You can't create the room:"},
+    {EngineMessage::cmake,"You created the item:"},
+    {EngineMessage::cmake,"You can't create that item!"},
+    {EngineMessage::cdelete,"You deleted the item:"},
+    {EngineMessage::cdelete,"You can't delete that item!"},
+    {EngineMessage::cdestroy,"You destroyed the room to the"},
+    {EngineMessage::cdestroy,"You can't destroy that room!"},
+    {EngineMessage::cjump,"You jumped to"},
+    {EngineMessage::cjump,"You can't jump to"},
+    //cjump
+    {EngineMessage::crooms,"Existing rooms:"} //specialfall
   };
 };
 
