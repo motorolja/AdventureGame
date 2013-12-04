@@ -5,14 +5,20 @@ using namespace std;
 
 int main()
 {
-  string str = "west";
+ Item it("Sword");
+  string str = "meat";
   bool check = true;
-  EngineMessage* message = new EngineMessage(EngineMessage::go);
-  message->addArgument(str); // 
+  EngineMessage* message = new EngineMessage(EngineMessage::ceat);
+  Player p;
+  p.addItem(it);
+  message->addArgument(str); //
   message->setSuccess(check); //
-  TextOutputSystem TOS;
+  message->setPlayer(p);
+  vector<Item> items = message->getPlayer().getInventory();
+
+    TextOutputSystem TOS;
     TOS.retrieveOutput(message);
     TOS.writeOutput();
-    //cout << "Hello world!" << endl;
     return 0;
+
 }

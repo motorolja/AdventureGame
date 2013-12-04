@@ -1,8 +1,12 @@
+#ifndef TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
+#define TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
+
 #include <iostream>
 #include "text_output_system.h"
 #include <string>
 #include <algorithm>
-//#include <ncurses.h>
+#include <sstream>
+
 using namespace std;
 
 void TextOutputSystem::writeOutput()
@@ -10,14 +14,44 @@ void TextOutputSystem::writeOutput()
   std::string def_string = getDefstring();
   std::string res = completeString(def_string);
 
-  //skriv ut
-
-  // cout<<res;
+  //Skriv ut
   printw(res.c_str());
-  printw("\n>>");
-  refresh();
-  getch();
+  printw("\n");
 
+  if(m_message->getCommand() == EngineMessage::cgo)
+    {
+      //Skriv ut namnet på rummet
+      string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
+    
+      printw(s.c_str());
+
+      //Skriv ut alla items i rummet
+      s = "you see the following items:";
+      vector<Item> items  = m_message->getRoom().getItems();
+      for(int i = 0; i < items.size(); ++i)
+	{
+	  s += ", " + items.at(i).getName();
+	}
+      printw("\n");
+      printw(s.c_str());
+      printw("\n");
+      //skriv ut spelarens hälsa
+      if(m_message->getPlayer().getHealth() == 0)
+	{
+	  printw("You died!\n");
+	}
+      else
+	{
+	  stringstream ss;
+	  ss<< m_message->getPlayer().getHealth();
+	  s = "Your Health: " + ss.str();
+	  printw(s.c_str());
+	  printw("\n");
+	}
+    }
+  printw(">>");
+  refresh();
+  getchar();
 }
 
 std::string TextOutputSystem::getDefstring() const
@@ -58,34 +92,30 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
   string temp;
 
   //Utmatingssträng för kommando: list
-  if(m_message->getCommand() == EngineMessage::_list)
+  if(m_message->getCommand() == EngineMessage::clist)
     {
       for(auto i : m_message->getPlayer().getInventory())
 	{
-	  temp = " " + i->getName();
+	  temp = " " + i.getName();
 	  _complete_string.append(temp);
 	}
     }
 
   else
     {
+
       vector<string> args = m_message->getArguments();
       for(int i = 0; i < args.size(); ++i)
         {
-	  temp = "<arg";
-	  temp += (std::to_string(i) + ">");
-
-	  size_t pos = _complete_string.find(temp);
-
-	  //Är vi säkra på att den kommer att finnas? Behöver vi kolla detta?
-	  if(pos != string::npos)
-            {
-	      _complete_string.replace(pos,temp.length(),args.at(i));
-            }
-
+          temp = " " + args.at(i);
+          _complete_string.append(temp);
+    
         }
     }
-
   return _complete_string;
 }
 
+
+
+
+#endif // TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
