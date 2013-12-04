@@ -3,9 +3,7 @@
 
 #include <string>
 #include "message.h"
-#include "def_strings.h"
 #include <vector>
-//#include <ncurses.h>
 
 class OutputSystem
 {
@@ -21,6 +19,4 @@ class OutputSystem
 
 };
 
-
 #endif
-

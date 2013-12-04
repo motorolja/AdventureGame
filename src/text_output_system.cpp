@@ -4,15 +4,32 @@ using namespace std;
 
 void TextOutputSystem::writeOutput()
 {
-    std::string def_string = getDefstring();
-    std::string res = completeString(def_string);
+ std::string def_string = getDefstring();
+ std::string res = completeString(def_string);
 
-    //skriv ut
-    /*printw(out_string.c_str());
-    printw("\n>>");
-    refresh();*/
+ //Skriv ut
+ printw(res.c_str());
+ refresh();
+ if(m_message->getCommand() == EngineMessage::cgo)
+   {
+    string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
 
-    }
+    printw("\n");
+    printw(s.c_str());
+
+    s = "you see the following items:";
+    for(auto i : m_message->getRoom.getItems())
+        s = " " + i.getName();
+
+    printw("\n");
+    printw(s.c_str());
+
+    refresh();
+   }
+
+ printw("\n>>");
+ refresh();
+}
 
 std::string TextOutputSystem::getDefstring() const
     {
@@ -52,7 +69,7 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
     string temp;
 
     //Utmatingssträng för kommando: list
-    if(m_message->getCommand() == EngineMessage::_list)
+    if(m_message->getCommand() == EngineMessage::clist)
     {
      for(auto i : m_message->getPlayer().getInventory())
        {
@@ -62,6 +79,16 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
     }
 
     else
+    {
+    vector<string> args = m_message->getArguments();
+     for(auto i : args)
+       {
+            temp = ", " + i;
+            _complete_string.append(temp);
+       }
+    }
+
+    /*else
     {
         vector<string> args = m_message->getArguments();
         for(int i = 0; i < args.size(); ++i)
@@ -76,9 +103,8 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
             {
                 _complete_string.replace(pos,temp.length(),args.at(i));
             }
-
         }
-    }
+    }*/
 
     return _complete_string;
 }
