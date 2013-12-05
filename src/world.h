@@ -13,7 +13,7 @@ public:
 	~World();
 	
 	void clear();
-	void setRoom(Position position, Room room);
+	void setRoom(Position position, Room *room);
 	void removeRoom(Position position);
 	std::vector<std::string> getRoomNames() const
 	{
@@ -33,7 +33,7 @@ public:
 		}
 		return positions;
 	}
-	Room getRoom(Position position) const
+	Room* getRoom(Position position) const
 	{
 		return m_rooms[position];
 	}
@@ -45,7 +45,7 @@ public:
 		return false;
 	}
 private:
-	std::map<Position, Room> m_rooms;
+	std::map<Position, Room*> m_rooms;
 };
 
 #endif
