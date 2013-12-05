@@ -19,6 +19,12 @@ public:
 	void 			setInput(InputMessage* input_message);
 	bool 			update();
 private:
+	//helper functions
+	bool Go(std::string direction);
+	bool Eat(std::string item_name);
+	bool Throw(std::string item_name);
+	bool Take(std::string item_name);
+
 	bool			m_running;
 	EngineMessage*	m_enginemessage;	//temporär lagring
 	InputMessage*	m_inputmessage;		//temporär lagring
