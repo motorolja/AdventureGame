@@ -12,20 +12,30 @@ using namespace std;
 void TextOutputSystem::writeOutput()
 {
   std::string def_string = getDefstring();
-  std::string res = completeString(def_string);
 
-  //Skriv ut
-  printw(res.c_str());
+  if(m_message->getSuccess())
+    {
+      //skriv ut defaultstring med argument 
+      std::string res = completeString(def_string);
+      printw(res.c_str());
+    }
+
+  else
+    {
+      //skriv ut defaultstring om command inte lyckades
+      printw(def_string.c_str());
+    }
+  
   printw("\n");
-
-  if(m_message->getCommand() == EngineMessage::cgo)
+ 
+  if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess())
     {
       //Skriv ut namnet på rummet
       string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
     
       printw(s.c_str());
 
-      //Skriv ut alla items i rummet
+      //Skriv ut alla items i det nya rummet
       s = "you see the following items:";
       vector<Item> items  = m_message->getRoom().getItems();
       for(int i = 0; i < items.size(); ++i)
@@ -51,7 +61,7 @@ void TextOutputSystem::writeOutput()
     }
   printw(">>");
   refresh();
-  getchar();
+  getchar(); // för testning av output och ska tas bort när man testar med input
 }
 
 std::string TextOutputSystem::getDefstring() const
@@ -59,15 +69,15 @@ std::string TextOutputSystem::getDefstring() const
   string res;
   auto range = m_defaultstrings.equal_range( m_message->getCommand() ); //range = pair<const unordered_multimap<int,string>::iterator, const unordered_multimap<int,string>::iterator>
 
-  // kolla om det bara finns 1 standardsträng, ex: kommando help eller _list
-  //Om kommandot har 2 standradsträngar, så hittar man den rätta med hjälp av check
+  // kolla om det bara finns 1 standardsträng, ex: kommando chelp
+  //Om kommandot har 2 standradsträngar,så hittar man den rätta med hjälp av getSucces
   auto temp = range.first;
   if((++temp) == range.second)
     {
       unordered_multimap<int,std::string>::value_type x = *range.first;
       res = x.second;
     }
-  //
+  
   else{
 
     if(m_message->getSuccess() )
@@ -85,7 +95,6 @@ std::string TextOutputSystem::getDefstring() const
   return res;
 }
 
-//INTE färdig!!
 std::string TextOutputSystem::completeString( const std::string& defstring)
 {
   std::string _complete_string = defstring;
@@ -96,7 +105,7 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
     {
       for(auto i : m_message->getPlayer().getInventory())
 	{
-	  temp = " " + i.getName();
+	  temp = i.getName() + ", ";
 	  _complete_string.append(temp);
 	}
     }
