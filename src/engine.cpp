@@ -134,9 +134,23 @@ bool Engine::Take(std::string item_name)
 	return true;
 }
 
-bool Engine::update()
+void Engine::startRoom()
 {
 	Room* newroom = nullptr;
+	newroom = new Room( "The beginning", "Once upon a time.." );
+	Item t1("spoon");
+	Item t2("green lego-brick");
+	Item t3("old banana");
+	t3.addProperty(eProperty::edible);
+	t3.addProperty(eProperty::poisonous);
+	newroom->addItem(t1);
+	newroom->addItem(t2);
+	newroom->addItem(t3);
+	m_world.setRoom( m_player.getPosition(), newroom );
+}
+
+bool Engine::update()
+{
 	if(m_inputmessage == nullptr)
 	{
 		//should not happen
@@ -154,16 +168,7 @@ bool Engine::update()
 			{
 				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
-					newroom = new Room( "The beginning", "Once upon a time.." );
-					Item t1("spoon");
-					Item t2("green lego-brick");
-					Item t3("old banana");
-					t3.addProperty(eProperty::edible);
-					t3.addProperty(eProperty::poisonous);
-					newroom->addItem(t1);
-					newroom->addItem(t2);
-					newroom->addItem(t3);
-					m_world.setRoom( m_player.getPosition(), newroom );
+					startRoom();
 				break;
 				case BaseMessage::eCommand::cunknown:
 				break;

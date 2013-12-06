@@ -24,6 +24,8 @@ private:
 	bool Eat(std::string item_name);
 	bool Throw(std::string item_name);
 	bool Take(std::string item_name);
+	
+	void startRoom();
 
 	bool			m_running;
 	EngineMessage*	m_enginemessage;	//temporär lagring
