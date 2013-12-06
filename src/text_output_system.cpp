@@ -1,3 +1,4 @@
+//--
 #ifndef TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
 #define TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
 
@@ -13,9 +14,9 @@ void TextOutputSystem::writeOutput()
 {
   std::string def_string = getDefstring();
 
-  if(m_message->getSuccess())
+  if(m_message->getSuccess() && m_message->getCommand() != EngineMessage::chelp && m_message->getCommand() != EngineMessage::oload )
     {
-      //skriv ut defaultstring med argument 
+      //skriv ut defaultstring med argument
       std::string res = completeString(def_string);
       printw(res.c_str());
     }
@@ -25,14 +26,14 @@ void TextOutputSystem::writeOutput()
       //skriv ut defaultstring om command inte lyckades
       printw(def_string.c_str());
     }
-  
+
   printw("\n");
- 
-  if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess())
+
+  if(m_message->getCommand() == EngineMessage::cgo || m_message->getCommand() == EngineMessage::oload && m_message->getSuccess())
     {
       //Skriv ut namnet på rummet
       string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
-    
+
       printw(s.c_str());
 
       //Skriv ut alla items i det nya rummet
@@ -77,7 +78,7 @@ std::string TextOutputSystem::getDefstring() const
       unordered_multimap<int,std::string>::value_type x = *range.first;
       res = x.second;
     }
-  
+
   else{
 
     if(m_message->getSuccess() )
@@ -118,7 +119,7 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
         {
           temp = " " + args.at(i);
           _complete_string.append(temp);
-    
+
         }
     }
   return _complete_string;
