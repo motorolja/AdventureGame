@@ -19,7 +19,7 @@ void World::clear()
 	m_rooms.clear();
 }
 
-void World::setRoom(Position position, Room room)
+void World::setRoom(Position position, Room *room)
 {
 	if(m_rooms[position] != nullptr)
 		delete m_rooms[position];
