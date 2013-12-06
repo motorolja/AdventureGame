@@ -176,10 +176,15 @@ bool Engine::MakeRoom(string direction, string room_name, string room_descriptio
 		break;
 	}
 	
-	if(m_world.hasRoom( m_player.getPosition() + pos ) == true)
-		return false;
+	//if(m_world.hasRoom( m_player.getPosition() + pos ) == true)
+	//	return false;
 	else
+	{
+		//Room* newroom = nullptr;
+		//newroom = new Room( room_name, room_description );
+		//m_world.setRoom( m_player.getPosition() + pos, newroom );
 		m_world.setRoom( m_player.getPosition() + pos, new Room(room_name, room_description) );
+	}
 }
 
 bool Engine::MakeItem(vector<string> arg_list)
@@ -322,7 +327,7 @@ bool Engine::update()
 					{
 						if(args.size() == 3)
 						{
-							m_enginemessage->setSuccess( MakeRoom( args[0], args[1], args[2]) );
+							m_enginemessage->setSuccess( MakeRoom( args[0], args[1], args[2] ) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
