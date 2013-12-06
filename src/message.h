@@ -75,8 +75,6 @@ public:
 		return m_room;
 	}
 protected:
-	std::vector<std::string>    m_outputarguments;
-	eOutputCommand				m_outputcommand;
 	bool 						m_success;
 	bool						m_godmode;
 	Player 						m_player;

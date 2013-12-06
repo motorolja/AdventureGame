@@ -20,7 +20,7 @@ public:
 		std::vector<std::string> names;
 		for(auto it = m_rooms.begin(); it != m_rooms.end(); it++)
 		{
-			names.push_back( it->first.getName() );
+			names.push_back( it->second->getName() );
 		}
 		return names;
 	}
@@ -29,7 +29,7 @@ public:
 		std::vector<Position> positions;
 		for(auto it = m_rooms.begin(); it != m_rooms.end(); it++)
 		{
-			positions.push_back( it->second );
+			positions.push_back( it->first );
 		}
 		return positions;
 	}
