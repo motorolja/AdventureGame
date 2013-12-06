@@ -18,7 +18,7 @@ AdventureGame::AdventureGame(int argc, char*argv[])
 	
 	if(argc >= 2)
 	{
-		InputMessage* im = new InputMessage(eCommand::oload);
+		InputMessage* im = new InputMessage(BaseMessage::eCommand::oload);
 		//im->addArgument(/* argv[2] eller något */)-> setValid( true );
 		im->setValid( true );
 		engine->setInput( im );
