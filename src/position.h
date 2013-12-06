@@ -9,9 +9,9 @@ public:
   
   Position operator+ (Position&);
   Position operator- (Position&);
-  bool operator< (Position&);
-  bool operator> (Position&);
-  bool operator== (Position&);
+  bool operator< (const Position&) const;
+  bool operator> (const Position&) const;
+  bool operator== (const Position&) const;
 };
 
 #endif

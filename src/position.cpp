@@ -19,7 +19,7 @@ Position Position::operator- (Position& param)
   return temp;
 }
 
-bool Position::operator> (Position& param)
+bool Position::operator> (const Position& param) const
 {
   if( x > param.x )
     return true;
@@ -27,7 +27,7 @@ bool Position::operator> (Position& param)
     return true;
   return false;
 }
-bool Position::operator< (Position& param)
+bool Position::operator< (const Position& param) const
 {
   if( x < param.x )
     return true;
@@ -36,7 +36,7 @@ bool Position::operator< (Position& param)
   return false;
 }
 
-bool Position::operator== (Position& param)
+bool Position::operator== (const Position& param) const
 {
   if( x == param.x && y == param.y )
     return true;
