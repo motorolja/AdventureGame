@@ -2,9 +2,8 @@
 
 int main(int argc, char *argv[])
 {
-	AdventureGame *adventureGame;
+	AdventureGame *adventureGame = new AdventureGame(argc, argv);
 	adventureGame->Run();
-	delete adventureGame();
-	
+	delete adventureGame;
 	return 0;
 }
