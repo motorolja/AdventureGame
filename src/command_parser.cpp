@@ -92,9 +92,9 @@ bool CommandParser::validArguments(std::vector<std::string>& arguments)
 	return jumpIntInt( arguments );
       else if( m_command_index == 12 )  // make
 	return true;
-      else if( m_command_index == 11 )  // makeroom
-	return direction( arguments.front() );
     }
+  else if( arguments.size() == 3 && m_command_index == 11 )  // makeroom
+      return direction( arguments.front() ); 
   else if( arguments.size() > 2 && m_command_index == 12 ) // make
     return true;
   else if( oneArgument( arguments )) // kommandon med 1 argument
