@@ -280,7 +280,7 @@ bool Engine::update()
 			m_enginemessage->setSuccess( false );
 		}
 		//set resulting player and room
-		m_enginemessage-> setPlayer( m_player )-> setRoom( m_world.getRoom( m_player.getPosition() ) ) -> setGod( m_godmode );
+		m_enginemessage-> setPlayer( m_player )-> setRoom( *(m_world.getRoom( m_player.getPosition() )) ) -> setGod( m_godmode );
 	}
 	return m_running;
 }
