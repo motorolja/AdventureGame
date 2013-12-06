@@ -77,7 +77,7 @@ bool Engine::Eat(std::string item_name)
 		return false;
 	vector<eProperty> properties = p_items[index].getProperties();
 	bool poison = false;
-	bool edible = true; //false; !! ADD EDIBLE TO PROPERTIES OF ITEM !!
+	bool edible = false;
 	for(int i=0;i<properties.size();++i)
 	{
 		if(properties[i] == poisonous)
