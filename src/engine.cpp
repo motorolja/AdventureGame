@@ -11,14 +11,12 @@ Engine::Engine(bool godmode) : m_godmode(godmode)
 
 Engine::~Engine()
 {
-	delete m_enginemessage;
-	delete m_inputmessage;
+	//delete m_enginemessage;
+	//delete m_inputmessage;
 }
 
 void Engine::setInput(InputMessage* input_message)
 {
-	if(m_inputmessage != nullptr)
-		delete m_inputmessage;
 	m_inputmessage = input_message;
 }
 
