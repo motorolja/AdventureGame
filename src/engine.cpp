@@ -144,7 +144,7 @@ bool Engine::GodSave(string path)
 
 bool Engine::MakeRoom(string direction, string room_name, string room_description)
 {
-		short dir;
+	short dir;
 	if(direction == "west")
 		dir = 0;
 	else if(direction == "east")
@@ -176,13 +176,10 @@ bool Engine::MakeRoom(string direction, string room_name, string room_descriptio
 		break;
 	}
 	
-	//if(m_world.hasRoom( m_player.getPosition() + pos ) == true)
-	//	return false;
+	if(m_world.hasRoom( m_player.getPosition() + pos ) == true)
+		return false;
 	else
 	{
-		//Room* newroom = nullptr;
-		//newroom = new Room( room_name, room_description );
-		//m_world.setRoom( m_player.getPosition() + pos, newroom );
 		m_world.setRoom( m_player.getPosition() + pos, new Room(room_name, room_description) );
 	}
 }
