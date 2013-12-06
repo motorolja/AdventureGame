@@ -226,6 +226,16 @@ void Engine::ListRooms()
 	}
 }
 
+bool Engine::Jump(string x, string y)
+{
+	return false;
+}
+
+bool Engine::Jump(string room_name)
+{
+	return false;
+}
+
 void Engine::startRoom() //ska bort snart
 {
 	Room* newroom = nullptr;
