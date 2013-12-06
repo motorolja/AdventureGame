@@ -12,13 +12,13 @@ AdventureGame::AdventureGame(int argc, char*argv[])
 	}
 	input = new TextInputSystem();
 	output = new TextOutputSystem();
-	engnie = new Engine(god_mode);
+	engine = new Engine(god_mode);
 	m_running = true;
 	
 	if(argc >= 2)
 	{
-		InputMessage* im = new InputMessage(oload);
-		im->addArgumnet(/* argv[2] eller något */)-> setValid( true );
+		InputMessage* im = new InputMessage(BaseMessage::eCommand(oload));
+		im->addArgument(/* argv[2] eller något */)-> setValid( true );
 		engine->setInput( im );
 		engine->update();
 	}

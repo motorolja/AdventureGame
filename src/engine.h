@@ -1,6 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-#include "file_handler.h"
+//#include "file_handler.h"
 #include "message.h"
 #include "player.h"
 #include "world.h"
@@ -29,7 +29,7 @@ private:
 	EngineMessage*	m_enginemessage;	//temporär lagring
 	InputMessage*	m_inputmessage;		//temporär lagring
 	bool 			m_godmode;
-	FileHandler 	m_filehandler;
+	//FileHandler 	m_filehandler;
 	World 			m_world;
 	Player 			m_player;
 };

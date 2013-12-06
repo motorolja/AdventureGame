@@ -35,7 +35,7 @@ public:
 	}
 	Room* getRoom(Position position) const
 	{
-		return m_rooms[position];
+		return m_rooms.at(position);
 	}
 	bool hasRoom(Position position) const
 	{
