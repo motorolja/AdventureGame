@@ -203,7 +203,7 @@ bool Engine::MakeItem(vector<string> arg_list)
 			break;
 		}
 	}
-	m_world.setRoom( m_player.getPosition(), temp);
+	m_world.getRoom( m_player.getPosition() )->addItem( temp );
 	return true;
 }
 
