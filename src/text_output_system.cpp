@@ -1,7 +1,3 @@
-//--
-#ifndef TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-#define TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
-
 #include <iostream>
 #include "text_output_system.h"
 #include <string>
@@ -41,7 +37,14 @@ void TextOutputSystem::writeOutput()
       vector<Item> items  = m_message->getRoom().getItems();
       for(int i = 0; i < items.size(); ++i)
 	{
-	  s += " " + items.at(i).getName();
+	  if(i == items.size()-1)
+	    {
+	      s += " " + items.at(i).getName();
+	    }
+	  else
+	    {
+	      s += " " + items.at(i).getName() + ",";
+	    }
 	}
       printw("\n");
       printw(s.c_str());
@@ -60,7 +63,7 @@ void TextOutputSystem::writeOutput()
 	  printw("\n");
 	}
     }
-  printw(">>");
+  printw(">");
   refresh();
   getchar(); // för testning av output och ska tas bort när man testar med input
 }
@@ -120,10 +123,20 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
   //Utmatingssträng för kommando: list
   if(m_message->getCommand() == EngineMessage::clist)
     {
-      for(auto i : m_message->getPlayer().getInventory())
+      int s = m_message->getPlayer().getInventory().size();
+      //for(auto i : m_message->getPlayer().getInventory())
+      for(int i = 0; i < s;++i)
 	{
-	  temp = i.getName() + " ";
-	  _complete_string.append(temp);
+	  if(i == s-1)
+	    {
+	      temp = " " + m_message->getPlayer().getInventory().at(i).getName();
+	      _complete_string.append(temp);
+	    }
+	  else
+	    {
+	      temp = " " + m_message->getPlayer().getInventory().at(i).getName() + ",";
+	      _complete_string.append(temp);
+	    }
 	}
     }
 
@@ -142,6 +155,3 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
 }
 
 
-
-
-#endif // TEXT_OUTPUT_SYSTEM_CPP_INCLUDED
