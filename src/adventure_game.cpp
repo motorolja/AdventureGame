@@ -5,10 +5,10 @@ using namespace std;
 
 AdventureGame::AdventureGame(int argc, char*argv[])
 {
-	bool god_mode = false;//
+	bool god_mode = false;
 	if(argc == 3)
 	{
-		if(argv[2] == "-god")
+		if(string(argv[2]) == "-god")
 			god_mode = true;
 	}
 	input = new TextInputSystem();
