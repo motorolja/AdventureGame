@@ -7,8 +7,8 @@ LFLAGS	= -lncurses
 
 all: text_adventure_game input_test player_test
 
-text_adventure_game: main.cpp adventure_game.o text_system_input.o output.o engine.o message.o room.o player.o position.o command_parser.o
-	$(CCC) -o text_adventure_game main.cpp adventure_game.o text_system_input.o output.o engine.o message.o room.o player.o position.o command_parser.o $(LFLAGS)
+text_adventure_game: main.cpp adventure_game.o text_input_system.o text_output_system.o engine.o message.o room.o player.o position.o command_parser.o
+	$(CCC) -o text_adventure_game main.cpp adventure_game.o text_input_system.o text_output_system.o engine.o message.o room.o player.o position.o command_parser.o $(LFLAGS)
 
 player_test: test_player.cpp player.o item.o position.o
 	$(CCC) -o player_test test_player.cpp player.o item.o position.o
@@ -28,13 +28,13 @@ position.o: position.cpp
 adventure_game.o: adventure_game.cpp
 	$(CCC) -c adventure_game.cpp
 
-text_system_input.o: text_input_system.cpp
+text_input_system.o: text_input_system.cpp
 	$(CCC) -c text_input_system.cpp
 
 command_parser.o: command_parser.cpp
 	$(CCC) -c command_parser.cpp
 
-output.o: text_output_system.cpp
+text_output_system.o: text_output_system.cpp
 	$(CCC) -c text_output_system.cpp
 
 engine.o: engine.cpp
