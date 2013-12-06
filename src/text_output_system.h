@@ -1,3 +1,4 @@
+//---
 #ifndef TEXT_OUTPUT_SYSTEM_H_INCLUDED
 #define TEXT_OUTPUT_SYSTEM_H_INCLUDED
 
@@ -38,7 +39,7 @@ class TextOutputSystem : public OutputSystem
     {EngineMessage::chelp,"Player Commands: chelp, clist, cgo, ceat, cthrow, ctake, csave || Create World: cmakeroom, cmake, cdelete, cdestroy, cjump, crooms"},
     {EngineMessage::clist,"Your inventory: "}, //specialfall
     {EngineMessage::clist,"Your inventory: Empty"},
-    {EngineMessage::cgo,"You go"}, 
+    {EngineMessage::cgo,"You go"},
     {EngineMessage::cgo,"You can´t go that direction!"},
     {EngineMessage::ceat,"You´re eating"},
     {EngineMessage::ceat,"You can´t eat That! You crazy?"},
@@ -59,6 +60,7 @@ class TextOutputSystem : public OutputSystem
     {EngineMessage::cjump,"You jumped to"},
     {EngineMessage::cjump,"You can't jump to"},
     //cjump
+    {EngineMessage::oload,"You see: "},
     {EngineMessage::crooms,"Existing rooms:"} //specialfall
   };
 };
