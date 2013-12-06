@@ -132,7 +132,101 @@ bool Engine::Take(std::string item_name)
 	return true;
 }
 
-void Engine::startRoom()
+bool Engine::PlayerSave()
+{
+	return false;
+}
+
+bool Engine::GodSave(string path)
+{
+	return false;
+}
+
+bool Engine::MakeRoom(string direction, string room_name, string room_description)
+{
+		short dir;
+	if(direction == "west")
+		dir = 0;
+	else if(direction == "east")
+		dir = 1;
+	else if(direction == "north")
+		dir = 2;
+	else if(direction == "south")
+		dir = 3;
+	else return false;
+	
+	Position pos(0,0);
+	
+	switch(dir)
+	{
+		case 0://west, left
+			pos.x--;
+		break;
+		case 1://east, right
+			pos.x++;
+		break;
+		case 2://north, up
+			pos.y--;
+		break;
+		case 3://south, down
+			pos.y++;
+		break;
+		default:
+			return false;
+		break;
+	}
+	
+	if(m_world.hasRoom( m_player.getPosition() + pos ) == true)
+		return false;
+	else
+		m_world.setRoom( m_player.getPosition() + pos, new Room(room_name, room_description) );
+}
+
+bool Engine::MakeItem(vector<string> arg_list)
+{
+	string item_name = arg_list[0];
+	Item temp(item_name);
+	for(int i=1;i<arg_list.size();++i)
+	{
+		switch(arg_list[i])
+		{
+			case 'e'://edible
+				temp.addProperty(eProperty::edible);
+			break;
+			case 'p'://poisonous
+				temp.addProperty(eProperty::poisonous);
+			break;
+			case 'j'://junk
+				temp.addProperty(eProperty::junk);
+			break;
+			default:
+			break;
+		}
+	}
+	m_world.getRoom( m_player.getPosition(), temp);
+	return true;
+}
+
+bool Engine::DeleteItem(string item_name)
+{
+	return false;
+}
+
+bool Engine::DestroyRoom(std::string direction)
+{
+	return false;
+}
+
+void Engine::ListRooms()
+{
+	vector<string> room_names = m_world.getRoomNames();
+	for(int i=0;i<room_names.size();++i)
+	{
+		m_enginemessage->addArgument( room_names[i] );
+	}
+}
+
+void Engine::startRoom() //ska bort snart
 {
 	Room* newroom = nullptr;
 	newroom = new Room( "The beginning", "Once upon a time.." );
@@ -197,6 +291,7 @@ bool Engine::update()
 					{
 						if(args.size() == 1)
 						{
+							m_enginemessage->setSuccess( GodSave( args[0] ) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -205,6 +300,7 @@ bool Engine::update()
 					{
 						if(args.size() == 0)
 						{
+							m_enginemessage->setSuccess( PlayerSave() );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -216,6 +312,7 @@ bool Engine::update()
 					{
 						if(args.size() == 3)
 						{
+							m_enginemessage->setSuccess( MakeRoom( args[0], args[1], args[2]) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -229,6 +326,7 @@ bool Engine::update()
 					{
 						if(args.size() >= 1)
 						{
+							m_enginemessage->setSuccess( MakeItem( args ) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -242,6 +340,7 @@ bool Engine::update()
 					{
 						if(args.size() == 1)
 						{
+							m_enginemessage->setSuccess( DeleteItem( args[0] ) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -255,6 +354,7 @@ bool Engine::update()
 					{
 						if(args.size() == 1)
 						{
+							m_enginemessage->setSuccess( DestroyRoom( args[0] ) );
 						}
 						else
 							m_enginemessage->setSuccess( false );
@@ -266,6 +366,16 @@ bool Engine::update()
 				case BaseMessage::eCommand::cjump:
 					if(m_godmode)
 					{
+						if(args.size() == 1)
+						{
+							m_enginemessage->setSuccess( Jump( args[0] ) );
+						}
+						else if(args.size() == 2)
+						{
+							m_enginemessage->setSuccess( Jump( args[0], args[1] ) );
+						}
+						else
+							m_enginemessage->setSuccess( false );
 					}
 					else
 						m_enginemessage->setSuccess( false );
@@ -276,6 +386,8 @@ bool Engine::update()
 					{
 						if(args.size() == 0)
 						{
+							ListRooms();
+							m_enginemessage->setSuccess( true );
 						}
 						else
 							m_enginemessage->setSuccess( false );

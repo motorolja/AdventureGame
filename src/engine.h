@@ -25,6 +25,16 @@ private:
 	bool Throw(std::string item_name);
 	bool Take(std::string item_name);
 	
+	bool PlayerSave();
+	bool GodSave(std::string path);
+	bool MakeRoom(std::string direction, std::string room_name, std::string room_description);
+	bool MakeItem(std::vector<std::string> arg_list);
+	bool DeleteItem(std::string item_name);
+	bool DestroyRoom(std::string direction);
+	void ListRooms();
+	bool Jump(std::string x, std::string y);
+	bool Jump(std::string room_name);
+	
 	void startRoom();
 
 	bool			m_running;
