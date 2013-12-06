@@ -29,7 +29,7 @@ void TextOutputSystem::writeOutput()
 
   printw("\n");
 
-  if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess()|| m_message->getCommand() == EngineMessage::oload && m_message->getSuccess())
+  if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess() || m_message->getCommand() == EngineMessage::oload && m_message->getSuccess())
     {
       //Skriv ut namnet på rummet
       string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
@@ -41,7 +41,7 @@ void TextOutputSystem::writeOutput()
       vector<Item> items  = m_message->getRoom().getItems();
       for(int i = 0; i < items.size(); ++i)
 	{
-	  s += ", " + items.at(i).getName();
+	  s += " " + items.at(i).getName();
 	}
       printw("\n");
       printw(s.c_str());
@@ -60,7 +60,7 @@ void TextOutputSystem::writeOutput()
 	  printw("\n");
 	}
     }
-  printw(">");
+  printw(">>");
   refresh();
   getchar(); // för testning av output och ska tas bort när man testar med input
 }
@@ -83,8 +83,24 @@ std::string TextOutputSystem::getDefstring() const
 
     if(m_message->getSuccess() )
       {
-	std::unordered_multimap<int,std::string>::value_type x = *(++range.first);
-	res = x.second;
+	if(m_message->getGod())
+	  {
+	    if(m_message->getCommand() == EngineMessage::chelp)
+	      {
+		std::unordered_multimap<int,std::string>::value_type x = *(range.first);
+		res = x.second;
+	      }
+	    else
+	      {
+		std::unordered_multimap<int,std::string>::value_type x = *(++range.first);
+		res = x.second;
+	      }
+	  }
+	else
+	  {
+	    std::unordered_multimap<int,std::string>::value_type x = *(++range.first);
+	    res = x.second;
+	  }
       }
     else
       {
