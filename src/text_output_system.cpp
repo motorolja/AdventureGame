@@ -13,6 +13,7 @@ void TextOutputSystem::writeOutput()
 {
   std::string def_string = getDefstring();
 
+<<<<<<< HEAD
   if(m_message->getSuccess())
     {
       //skriv ut defaultstring med argument 
@@ -29,13 +30,24 @@ void TextOutputSystem::writeOutput()
   printw("\n");
  
   if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess())
+=======
+  //Skriv ut
+  printw(res.c_str());
+  printw("\n");
+
+  if(m_message->getCommand() == EngineMessage::cgo)
+>>>>>>> f45950e2b7922ffc592b51da54023e857747d117
     {
       //Skriv ut namnet på rummet
       string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
     
       printw(s.c_str());
 
+<<<<<<< HEAD
       //Skriv ut alla items i det nya rummet
+=======
+      //Skriv ut alla items i rummet
+>>>>>>> f45950e2b7922ffc592b51da54023e857747d117
       s = "you see the following items:";
       vector<Item> items  = m_message->getRoom().getItems();
       for(int i = 0; i < items.size(); ++i)
@@ -61,7 +73,11 @@ void TextOutputSystem::writeOutput()
     }
   printw(">>");
   refresh();
+<<<<<<< HEAD
   getchar(); // för testning av output och ska tas bort när man testar med input
+=======
+  getchar();
+>>>>>>> f45950e2b7922ffc592b51da54023e857747d117
 }
 
 std::string TextOutputSystem::getDefstring() const
@@ -105,7 +121,11 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
     {
       for(auto i : m_message->getPlayer().getInventory())
 	{
+<<<<<<< HEAD
 	  temp = i.getName() + ", ";
+=======
+	  temp = " " + i.getName();
+>>>>>>> f45950e2b7922ffc592b51da54023e857747d117
 	  _complete_string.append(temp);
 	}
     }

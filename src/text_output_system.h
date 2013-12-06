@@ -35,6 +35,7 @@ class TextOutputSystem : public OutputSystem
   //std::unordered_multimap<int,std::string> m_defaultstrings;
   const std::unordered_multimap<int,std::string> m_defaultstrings{
     {EngineMessage::cunknown,"Invalid command"},// Default Message string
+<<<<<<< HEAD
     {EngineMessage::chelp,"Player Commands: chelp, clist, cgo, ceat, cthrow, ctake, csave || Create World: cmakeroom, cmake, cdelete, cdestroy, cjump, crooms"},
     {EngineMessage::clist,"Your inventory: "}, //specialfall
     {EngineMessage::clist,"Your inventory: Empty"},
@@ -44,6 +45,16 @@ class TextOutputSystem : public OutputSystem
     {EngineMessage::ceat,"You can´t eat That! You crazy?"},
     {EngineMessage::cthrow,"You threw the"},
     {EngineMessage::cthrow,"You can´t throw that!"},
+=======
+    {EngineMessage::chelp,"Player Commands: _list, go, eat, _throw, take, save Create World: makeroom, make, _delete, destroy, jump, rooms"},
+    {EngineMessage::clist,"Your inventory: "}, //specialfall
+    {EngineMessage::cgo,"You go"}, // <arg0> är argumentet som ska kompletteras, ex: You go west
+    {EngineMessage::cgo,"You can´t go that direction!"},
+    {EngineMessage::ceat,"You´re eating"},
+    {EngineMessage::ceat,"You can´t eat That! You crazy?"},
+    {EngineMessage::cthrow,"You threw"},
+    {EngineMessage::cthrow,"You can´t throw that item!"},
+>>>>>>> f45950e2b7922ffc592b51da54023e857747d117
     {EngineMessage::ctake,"You got this item:"},
     {EngineMessage::ctake,"You can´t take this item!"},
     {EngineMessage::csave,"You have saved your game!"},
