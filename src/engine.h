@@ -11,7 +11,7 @@ public:
 	Engine(bool godmode = false);
 	~Engine();
 	//enum eEngineStatus{};
-	EngineMessage* setOutput() const
+	EngineMessage* getOutput() const
 	{
 		return m_enginemessage;
 	}
