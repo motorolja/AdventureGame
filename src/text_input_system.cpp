@@ -14,11 +14,9 @@ InputMessage* TextInputSystem::getData()
 
   for( int y = 1; y < input.size(); ++y )
     {
-      // om jag har satt skip_ws = false && antingen att 
       if( skip_ws == false && input.at(y) == '\"'  )
 	{
 	  skip_ws = true;
-	  //"-1-2-3-4-" säg 0 har vi ", skip_ws = false
 	  temp.assign( input, start_of_word + 1, y - start_of_word - 1);
 	  if( start_of_word == 0 )
 	    m_command = temp;
