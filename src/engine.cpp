@@ -188,7 +188,7 @@ bool Engine::MakeItem(vector<string> arg_list)
 	Item temp(item_name);
 	for(int i=1;i<arg_list.size();++i)
 	{
-		switch(arg_list[i])
+		switch(arg_list[i][0])
 		{
 			case 'e'://edible
 				temp.addProperty(eProperty::edible);
@@ -203,7 +203,7 @@ bool Engine::MakeItem(vector<string> arg_list)
 			break;
 		}
 	}
-	m_world.getRoom( m_player.getPosition(), temp);
+	m_world.setRoom( m_player.getPosition(), temp);
 	return true;
 }
 
