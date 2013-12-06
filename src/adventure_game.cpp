@@ -23,6 +23,7 @@ AdventureGame::AdventureGame(int argc, char*argv[])
 		im->setValid( true );
 		engine->setInput( im );
 		engine->update();
+		delete im;
 	}
 }
 
