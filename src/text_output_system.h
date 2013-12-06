@@ -21,7 +21,7 @@ class TextOutputSystem : public OutputSystem
       //attron(COLOR_PAIR(1));
       wbkgd(stdscr, COLOR_PAIR(1));
       printw("Welcome to the Adventure Game");
-      printw("\n>>");
+      printw("\n>");
       scrollok(stdscr,TRUE);
       refresh();
 
