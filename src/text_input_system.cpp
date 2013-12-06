@@ -3,10 +3,11 @@
 
 InputMessage* TextInputSystem::getData()
 {
+
   m_command.clear();
   m_arguments.clear();// tömmer för att det alltid ska finnas senaste inmatningen
   char ncurses_input[254]; // för att getstr() vill har char[] och inte tar string
-  getstr( ncurses_input );
+  getnstr( ncurses_input,254 );
   std::string temp, input = ncurses_input; 
   unsigned int start_of_word = 0;
 
