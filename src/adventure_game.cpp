@@ -5,7 +5,7 @@ using namespace std;
 
 AdventureGame::AdventureGame(int argc, char*argv[])
 {
-	bool god_mode = false;
+	bool god_mode = false;//
 	if(argc == 3)
 	{
 		if(argv[2] == "-god")
