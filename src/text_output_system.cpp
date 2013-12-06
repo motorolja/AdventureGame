@@ -29,7 +29,7 @@ void TextOutputSystem::writeOutput()
 
   printw("\n");
 
-  if(m_message->getCommand() == EngineMessage::cgo || m_message->getCommand() == EngineMessage::oload && m_message->getSuccess())
+  if(m_message->getCommand() == EngineMessage::cgo && m_message->getSuccess()|| m_message->getCommand() == EngineMessage::oload && m_message->getSuccess())
     {
       //Skriv ut namnet på rummet
       string s =  m_message->getRoom().getName() + ": " + m_message->getRoom().getDescription();
@@ -60,7 +60,7 @@ void TextOutputSystem::writeOutput()
 	  printw("\n");
 	}
     }
-  printw(">>");
+  printw(">");
   refresh();
   getchar(); // för testning av output och ska tas bort när man testar med input
 }
