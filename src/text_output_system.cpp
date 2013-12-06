@@ -106,7 +106,7 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
     {
       for(auto i : m_message->getPlayer().getInventory())
 	{
-	  temp = i.getName() + ", ";
+	  temp = i.getName() + " ";
 	  _complete_string.append(temp);
 	}
     }
