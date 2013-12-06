@@ -155,6 +155,14 @@ bool Engine::update()
 				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
 					newroom = new Room( "The beginning", "Once upon a time.." );
+					Item t1("spoon");
+					Item t2("green lego-brick");
+					Item t3("old banana");
+					t3.addProperty(eProperty::edible);
+					t3.addProperty(eProperty::poisonous);
+					newroom->addItem(t1);
+					newroom->addItem(t2);
+					newroom->addItem(t3);
 					m_world.setRoom( m_player.getPosition(), newroom );
 				break;
 				case BaseMessage::eCommand::cunknown:
