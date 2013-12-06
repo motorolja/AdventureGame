@@ -153,6 +153,8 @@ bool Engine::update()
 			{
 				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
+					Room* newroom = new Room( "The beginning", "Once upon a time.." );
+					m_world.setRoom( m_player.getPosition(), newroom );
 				break;
 				case BaseMessage::eCommand::cunknown:
 				break;
