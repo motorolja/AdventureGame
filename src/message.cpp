@@ -67,3 +67,9 @@ EngineMessage* EngineMessage::setSuccess(bool success)
 	m_success = success;
 	return this;
 }
+
+EngineMessage* EngineMessage::setGod(bool godmode)
+{
+	m_godmode = godmode;
+	return this;
+}
