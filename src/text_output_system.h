@@ -21,7 +21,7 @@ class TextOutputSystem : public OutputSystem
       //attron(COLOR_PAIR(1));
       wbkgd(stdscr, COLOR_PAIR(1));
       printw("Welcome to the Adventure Game");
-      printw("\n>");
+      printw("\n>>");
       scrollok(stdscr,TRUE);
       refresh();
 
@@ -36,7 +36,8 @@ class TextOutputSystem : public OutputSystem
   //std::unordered_multimap<int,std::string> m_defaultstrings;
   const std::unordered_multimap<int,std::string> m_defaultstrings{
     {EngineMessage::cunknown,"Invalid command"},// Default Message string
-    {EngineMessage::chelp,"Player Commands: chelp, clist, cgo, ceat, cthrow, ctake, csave || Create World: cmakeroom, cmake, cdelete, cdestroy, cjump, crooms"},
+    {EngineMessage::chelp,"Player Commands: help, list, go, eat, throw, take, save"},
+    {EngineMessage::chelp,"God Commands: makeroom, make, delete, destroy, jump, rooms"},
     {EngineMessage::clist,"Your inventory: "}, //specialfall
     {EngineMessage::clist,"Your inventory: Empty"},
     {EngineMessage::cgo,"You go"},
