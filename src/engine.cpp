@@ -77,7 +77,7 @@ bool Engine::Eat(std::string item_name)
 	}
 	if(index == -1)
 		return false;
-	vector<eProperty> properties = p_items[i].getProperties();
+	vector<eProperty> properties = p_items[index].getProperties();
 	bool poison = false;
 	bool edible = true; //false; !! ADD EDIBLE TO PROPERTIES OF ITEM !!
 	for(int i=0;i<properties.size();++i)
@@ -129,7 +129,7 @@ bool Engine::Take(std::string item_name)
 	}
 	if(index == -1)
 		return false;
-	m_player.addItem( r_items[i] );
+	m_player.addItem( r_items[index] );
 	m_world.getRoom( m_player.getPosition() )->removeItem( index );
 	return true;
 }
@@ -151,34 +151,34 @@ bool Engine::update()
 		{
 			switch(m_inputmessage->getCommand())
 			{
-				case oload: //this should never come from TextInputSystem
+				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
 				break;
-				case cunknown:
+				case BaseMessage::eCommand::cunknown:
 				break;
-				case chelp:
+				case BaseMessage::eCommand::chelp:
 					m_enginemessage->setSuccess( true );
 				break;
-				case clist:
+				case BaseMessage::eCommand::clist:
 					m_enginemessage->setSuccess( true );
 				break;
-				case cgo:
+				case BaseMessage::eCommand::cgo:
 					m_enginemessage->setSuccess( Go( args[0] ) );
 					//
 				break;
-				case ceat:
+				case BaseMessage::eCommand::ceat:
 					m_enginemessage->setSuccess( Eat( args[0] ) );
 					//
 				break;
-				case cthrow:
+				case BaseMessage::eCommand::cthrow:
 					m_enginemessage->setSuccess( Throw( args[0] ) );
 					//
 				break;
-				case ctake:
+				case BaseMessage::eCommand::ctake:
 					m_enginemessage->setSuccess( Take( args[0] ) );
 					//
 				break;
-				case csave:
+				case BaseMessage::eCommand::csave:
 					if(m_godmode)
 					{
 						if(args.size() == 1)
@@ -197,7 +197,7 @@ bool Engine::update()
 					}
 					//
 				break;
-				case cmakeroom:
+				case BaseMessage::eCommand::cmakeroom:
 					if(m_godmode)
 					{
 						if(args.size() == 3)
@@ -210,7 +210,7 @@ bool Engine::update()
 						m_enginemessage->setSuccess( false );
 					//
 				break;
-				case cmake:
+				case BaseMessage::eCommand::cmake:
 					if(m_godmode)
 					{
 						if(args.size() >= 1)
@@ -223,7 +223,7 @@ bool Engine::update()
 						m_enginemessage->setSuccess( false );
 					//
 				break;
-				case cdelete:
+				case BaseMessage::eCommand::cdelete:
 					if(m_godmode)
 					{
 						if(args.size() == 1)
@@ -236,7 +236,7 @@ bool Engine::update()
 						m_enginemessage->setSuccess( false );
 					//
 				break;
-				case cdestroy:
+				case BaseMessage::eCommand::cdestroy:
 					if(m_godmode)
 					{
 						if(args.size() == 1)
@@ -249,7 +249,7 @@ bool Engine::update()
 						m_enginemessage->setSuccess( false );
 					//
 				break;
-				case cjump:
+				case BaseMessage::eCommand::cjump:
 					if(m_godmode)
 					{
 					}
@@ -257,7 +257,7 @@ bool Engine::update()
 						m_enginemessage->setSuccess( false );
 					//
 				break;
-				case crooms:
+				case BaseMessage::eCommand::crooms:
 					if(m_godmode)
 					{
 						if(args.size() == 0)
