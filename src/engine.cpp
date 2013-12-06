@@ -287,6 +287,10 @@ bool Engine::update()
 				default:
 				break;
 			}
+			for(int i=0;i<args.size();++i)
+			{
+				m_enginemessage->addArgument( args[i] );
+			}
 		}
 		else
 		{
