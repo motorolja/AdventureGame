@@ -1,0 +1,38 @@
+#ifndef FILEHANDLER_H_INCLUDED
+#define FILEHANDLER_H_INCLUDED
+
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include "player.h"
+#include "world.h"
+
+
+class FileHandler
+{
+public:
+    ~FileHandler() = default;
+    FileHandler(const std::string& filename) : m_file(),m_oldFilename(filename),m_oldFile(false){}
+
+    Player loadPlayer(const std::string&);
+    void savePlayer(const std::string&, Player);
+
+    World loadWorld(const std::string&);
+    void saveWorld(const std::string&, World);
+
+    bool isLastLoadSucccessful() const {return m_oldFile;}
+private:
+    std::string serializeItem(const Item&); //save
+    Item deserializeItem(std::stringstream&);  //load
+    std::string serializeStatus(const Status&); //save
+    Status deserializeStatus(std::stringstream&); //load
+    std::string serializeRoom(Position& ,Room const* ); //save
+    Room* deserializeRoom(std::stringstream&);  //load
+
+    std::fstream m_file;
+    std::string m_oldFilename;
+    bool m_oldFile;
+};
+
+
+#endif // FILEHANDLER_H_INCLUDED
