@@ -11,6 +11,9 @@ class TextInputSystem : public InputSystem
   TextInputSystem() = default;
   
   InputMessage* getData();
+  void inputSlicer(std::string& );
+  std::string chooseLine(std::string&, std::size_t);
+  std::size_t findEndOfLine(std::string&);
 
  private:
   std::string m_command;
