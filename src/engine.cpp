@@ -211,12 +211,62 @@ bool Engine::MakeItem(vector<string> arg_list)
 
 bool Engine::DeleteItem(string item_name)
 {
-	return false;
+	vector<Item> r_items = m_world.getRoom( m_player.getPosition() )->getItems();
+	int index = -1;
+	for(int i=0;i<r_items.size();++i)
+	{
+		if(r_items[i].getName() == item_name)
+		{
+			index = i;
+			break;
+		}
+	}
+	if(index == -1)
+		return false;
+	m_world.getRoom( m_player.getPosition() )->removeItem( index );
+	return true;
 }
 
 bool Engine::DestroyRoom(std::string direction)
 {
-	return false;
+	short dir;
+	if(direction == "west")
+		dir = 0;
+	else if(direction == "east")
+		dir = 1;
+	else if(direction == "north")
+		dir = 2;
+	else if(direction == "south")
+		dir = 3;
+	else return false;
+	
+	Position pos(0,0);
+	
+	switch(dir)
+	{
+		case 0://west, left
+			pos.x--;
+		break;
+		case 1://east, right
+			pos.x++;
+		break;
+		case 2://north, up
+			pos.y--;
+		break;
+		case 3://south, down
+			pos.y++;
+		break;
+		default:
+			return false;
+		break;
+	}
+	
+	if(m_world.hasRoom( m_player.getPosition() + pos ) == false)
+		return false;
+	else
+	{
+		m_world.removeRoom( m_player.getPosition() + pos );
+	}
 }
 
 void Engine::ListRooms()
@@ -230,11 +280,44 @@ void Engine::ListRooms()
 
 bool Engine::Jump(string x, string y)
 {
-	return false;
+	Position pos(0,0);
+	try
+	{
+		pos.x = stoi( x );
+		pos.y = stoi( y );
+	}
+	catch(...)
+	{
+		return false;
+	}
+
+	if(m_world.hasRoom( pos ) == false)
+		return false;
+	else
+		m_player.setPosition( pos );
+	return true;
 }
 
 bool Engine::Jump(string room_name)
 {
+	vector<string> room_names = m_world.getRoomNames();
+	vector<Position> room_pos = m_world.getRoomPositions();
+	int index = -1;
+	for(int i=0;i<room_names.size();++i)
+	{
+		if(room_name == room_names[i])
+		{
+			index = i;
+			break;
+		}
+	}
+	if(index == -1)
+		return false;
+	else if(m_world.hasRoom( room_pos[index] ) == true )
+	{
+		m_player.setPosition( room_pos[index] );
+		return true;
+	}
 	return false;
 }
 
