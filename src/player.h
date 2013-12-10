@@ -32,6 +32,7 @@ public:
     
     void addStatus(Status);
     void clearStatus();
+    std::vector<Status> getStatuses();
     
     void setPosition(Position);
     Position getPosition() const;
