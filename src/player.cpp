@@ -32,6 +32,11 @@ void Player::clearStatus()
     m_statuses.clear();    // "Status" inneh�ller inte pekare
 }
 
+std::vector<Status> Player::getStatuses()
+{
+    return m_statuses;
+}
+
 void Player::setPosition(Position position)
 {
     m_position = position;
