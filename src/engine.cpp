@@ -57,7 +57,11 @@ bool Engine::Go(std::string direction)
 	if(m_world.hasRoom( m_player.getPosition() + pos ) == false)
 		return false;
 	else
+	{
+		if(m_godmode == false)
+			m_player.update();
 		m_player.setPosition( m_player.getPosition() + pos );
+	}
 	return true;
 }
 
@@ -181,6 +185,7 @@ bool Engine::MakeRoom(string direction, string room_name, string room_descriptio
 	else
 	{
 		m_world.setRoom( m_player.getPosition() + pos, new Room(room_name, room_description) );
+		return true;
 	}
 }
 
@@ -505,8 +510,9 @@ bool Engine::update()
 			m_enginemessage->setSuccess( false );
 		}
 		//set resulting player and room
-		m_player.update();
 		m_enginemessage-> setPlayer( m_player )-> setRoom( *(m_world.getRoom( m_player.getPosition() )) ) -> setGod( m_godmode );
 	}
+	if(m_player.getHealth() == 0)
+		m_running = false;
 	return m_running;
 }
