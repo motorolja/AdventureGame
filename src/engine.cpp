@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Engine::Engine(bool godmode) : m_godmode(godmode)
+Engine::Engine(string filename, bool godmode) : m_filename(filename), m_godmode(godmode)
 {
 	m_enginemessage = nullptr;
 	m_inputmessage  = nullptr;
@@ -138,12 +138,16 @@ bool Engine::Take(std::string item_name)
 
 bool Engine::PlayerSave()
 {
-	return false;
+	m_filehandler.savePlayer(m_filename);// !!Lägg till bool returntyp till save funktioner!!
+	m_filehandler.saveWorld(m_filename);
+	return true;
 }
 
 bool Engine::GodSave(string path)
 {
-	return false;
+	m_filehandler.savePlayer(m_filename);// !!Lägg till bool returntyp till save funktioner!!
+	m_filehandler.saveWorld(m_filename);
+	return true;
 }
 
 bool Engine::MakeRoom(string direction, string room_name, string room_description)
@@ -360,7 +364,9 @@ bool Engine::update()
 			{
 				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
-					startRoom();
+					m_world = m_filehandler.loadWorld(m_filename);
+					m_player = m_filehandler.loadPlayer(m_filename);
+					//startRoom();
 				break;
 				case BaseMessage::eCommand::cunknown:
 				break;
