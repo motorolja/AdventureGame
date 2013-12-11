@@ -4,11 +4,11 @@
 
 using namespace std;
 
-void FileHandler::savePlayer(const string& filename, Player player)
+bool FileHandler::savePlayer(const string& filename, Player player)
 {
  stringstream ss;
- ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
- //ios_base::openmode mode = ios::trunc;
+ //ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
+ ios_base::openmode mode = ios::trunc;
  m_file.open(filename,ios::out | mode);
 
 if(m_file.is_open())
@@ -19,18 +19,14 @@ if(m_file.is_open())
      //Rad 2 fram till items
      auto statuses = player.getStatuses(); //Vi behöver lägga till en sån funktion
      for(auto s : statuses)
-        //ska dessa vara på enskilda rader?
-        ss<<" "<<static_cast<unsigned>(s.m_status)<<" "<<s.m_duration;
+        ss<<serializeStatus(s);
      ss<<"\n";
 
      //items
      auto items = player.getInventory();
         for(auto i:items)
         {
-            ss<<i.getName();
-            vector<eProperty> properties = i.getProperties();
-                for(auto p : properties)
-                    ss<<" "<<static_cast<unsigned>(p);
+            ss<<serializeItem(i);
             ss<<"\n";
         }
 
@@ -38,8 +34,10 @@ if(m_file.is_open())
      m_file<<ss.str();
 
      m_file.close();
+     return true;
  }
 
+ return false;
 }
 
 Player FileHandler::loadPlayer(const string& filename)
@@ -47,6 +45,8 @@ Player FileHandler::loadPlayer(const string& filename)
     stringstream ss;
     string line;
     int health;
+    unsigned stat;
+    unsigned duration;
     Position pos;
     Player player;
 
@@ -55,24 +55,32 @@ Player FileHandler::loadPlayer(const string& filename)
     if(m_file.is_open())
     {
         //rad 1
-        m_file>>pos.x>>pos.y>>health;
+        getline(m_file,line);
+        ss<<line;
+        ss>>pos.x>>pos.y>>health;
         player.setHealth(health);
         player.setPosition(pos);
+        ss.clear();
 
         //rad 2
         getline(m_file,line);
         ss<<line;
-        while(ss)
+        while(ss>>stat>>duration)
         {
-            player.addStatus(deserializeStatus(ss));
+            Status s(static_cast<eStatus>(stat),duration);
+            player.addStatus(s);
         }
         ss.clear();
 
         //items
         while(getline(m_file,line))
         {
-            ss<<line;
+            //getline(m_file,line);
+            ss<<line<<"\n";
+            getline(m_file,line);
+            ss<<line<<"\n";
             player.addItem(deserializeItem(ss));
+            ss.clear();
         }
 
         m_file.close();
@@ -81,10 +89,12 @@ Player FileHandler::loadPlayer(const string& filename)
  return player;
 }
 
-void FileHandler::saveWorld(const string& filename, World world)
+bool FileHandler::saveWorld(const string& filename, World world)
 {
  ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
  m_file.open(filename,ios::out | mode);
+
+ stringstream ss;
 
  if(m_file.is_open())
  {
@@ -93,11 +103,15 @@ void FileHandler::saveWorld(const string& filename, World world)
      for(int i = 0; i<positions.size(); ++i)
      {
          Room* p_room = world.getRoom(positions.at(i));
-         m_file << serializeRoom(positions.at(i),p_room)<<"\n";
+         ss << serializeRoom(positions.at(i),p_room)<<"\n";
 
      }
+     m_file<<ss.str();
+     cout<<ss.str()<<"\n"; //debug
      m_file.close();
+     return true;
  }
+ return false;
 }
 
 World FileHandler::loadWorld(const string& filename)
@@ -138,7 +152,7 @@ Item FileHandler::deserializeItem(stringstream& ss)
     string name;
 
     //Fungerar endast korrekt då namnet bara är ett ord
-    ss>>name;
+    getline(ss,name);
     Item item(name);
     unsigned property;
 
@@ -162,6 +176,13 @@ Status FileHandler::deserializeStatus(stringstream& ss)
     return s;
 }
 
+std::string FileHandler::serializeStatus(const Status& status)
+{
+    stringstream ss;
+    ss<<static_cast<unsigned>(status.m_status)<<" "<<status.m_duration<<" ";
+    return ss.str();
+}
+
 Room* FileHandler::deserializeRoom(std::stringstream& ss)
 {
     stringstream oneline_ss;
@@ -181,14 +202,14 @@ Room* FileHandler::deserializeRoom(std::stringstream& ss)
 string FileHandler::serializeItem(const Item& item)
 {
  stringstream ss;
- ss<<item.getName();
+ ss<<item.getName()<<"\n";
  vector<eProperty> properties = item.getProperties();
     for(auto p : properties)
-        ss<<" "<<static_cast<unsigned>(p);
+        ss<<static_cast<unsigned>(p)<<" ";
     return ss.str();
 }
 
-string FileHandler::serializeRoom(Position& pos,Room const* room)
+string FileHandler::serializeRoom(Position& pos,Room const* const room)
 {
     stringstream ss;
     //position
