@@ -1,6 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-//#include "file_handler.h"
+#include "file_handler.h"
 #include "message.h"
 #include "player.h"
 #include "world.h"
@@ -8,7 +8,7 @@
 class Engine
 {
 public:
-	Engine(bool godmode = false);
+	Engine(std::string filename, bool godmode = false);
 	~Engine();
 	//enum eEngineStatus{};
 	EngineMessage* getOutput() const
@@ -37,11 +37,12 @@ private:
 	
 	void startRoom();
 
+	std::string		m_filename;
 	bool			m_running;
 	EngineMessage*	m_enginemessage;	//temporär lagring
 	InputMessage*	m_inputmessage;		//temporär lagring
 	bool 			m_godmode;
-	//FileHandler 	m_filehandler;
+	FileHandler 	m_filehandler;
 	World 			m_world;
 	Player 			m_player;
 };
