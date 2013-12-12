@@ -1,6 +1,7 @@
 #include "FileHandler.h"
 #include <iostream>
 #include <sstream>
+#include <utility>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ if(m_file.is_open())
      ss<<player.getPosition().x<<" "<<player.getPosition().y<<" "<<player.getHealth()<<"\n";
 
      //Rad 2 fram till items
-     auto statuses = player.getStatuses(); //Vi behöver lägga till en sån funktion
+     auto statuses = player.getStatuses();
      for(auto s : statuses)
         ss<<serializeStatus(s);
      ss<<"\n";
@@ -40,7 +41,7 @@ if(m_file.is_open())
  return false;
 }
 
-Player FileHandler::loadPlayer(const string& filename)
+void FileHandler::loadPlayer(const string& filename,Player& player)
 {
     stringstream ss;
     string line;
@@ -48,7 +49,7 @@ Player FileHandler::loadPlayer(const string& filename)
     unsigned stat;
     unsigned duration;
     Position pos;
-    Player player;
+    //Player player;
 
     m_file.open(filename,ios::in );
 
@@ -86,7 +87,7 @@ Player FileHandler::loadPlayer(const string& filename)
         m_file.close();
     }
 
- return player;
+ //return player;
 }
 
 bool FileHandler::saveWorld(const string& filename,const World& world)
@@ -115,12 +116,10 @@ bool FileHandler::saveWorld(const string& filename,const World& world)
  return false;
 }
 
-World FileHandler::loadWorld(const string& filename)
+void FileHandler::loadWorld(const string& filename, World& world)
 {
-    //om m_file.load inte lyckas så returnera ett default rum på pos (0,0)
-    World world;
     Position pos;
-    stringstream ss;
+    //stringstream ss;
     string room_str;
     m_file.open(filename,ios::in );
 
@@ -128,20 +127,19 @@ World FileHandler::loadWorld(const string& filename)
     {
         while(m_file)
         {
-         m_file>>pos.x>>pos.y;
+         m_file>>pos.x>>pos.y>>ws;
          getline(m_file,room_str,';');
-         ss<<room_str;
+         stringstream ss(room_str);
          world.setRoom(pos,deserializeRoom(ss));
         }
 
         m_file.close();
-        return world;
+
     }
 
     else
     {
         world.setRoom(Position(0,0),new Room("Empty Room","This room is a reflection of the emptiness in your heart"));
-        return world;
     }
 
 }
@@ -152,7 +150,6 @@ Item FileHandler::deserializeItem(stringstream& ss)
 
     string name;
 
-    //Fungerar endast korrekt då namnet bara är ett ord
     getline(ss,name);
     Item item(name);
     unsigned property;
@@ -162,12 +159,13 @@ Item FileHandler::deserializeItem(stringstream& ss)
         //ss>>property;
         item.addProperty(static_cast<eProperty>(property));
     }
+    ss.clear();
 
     return item;
 
 }
 
-Status FileHandler::deserializeStatus(stringstream& ss)
+/*Status FileHandler::deserializeStatus(stringstream& ss)
 {
     unsigned status;
     unsigned short duration;
@@ -175,7 +173,7 @@ Status FileHandler::deserializeStatus(stringstream& ss)
     ss>>status>>duration;
     Status s(static_cast<eStatus>(status),duration);
     return s;
-}
+}*/
 
 std::string FileHandler::serializeStatus(const Status& status)
 {
@@ -186,15 +184,17 @@ std::string FileHandler::serializeStatus(const Status& status)
 
 Room* FileHandler::deserializeRoom(std::stringstream& ss)
 {
-    stringstream oneline_ss;
+    stringstream item_ss;
     string name,description,line;
     getline(ss,name);
     getline(ss,description);
     Room* room = new Room(name,description);
     while(getline(ss,line))
     {
-        oneline_ss<<line;
-        room->addItem(deserializeItem(oneline_ss));
+        item_ss<<line<<"\n";
+        getline(ss,line);
+        item_ss<<line<<"\n";
+        room->addItem(deserializeItem(item_ss));
     }
 
     return room;
