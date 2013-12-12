@@ -19,8 +19,8 @@ class Item
   void addProperty(eProperty);
   void removeProperty(eProperty);
   void clearProperties();
-  std::vector<eProperty> getProperties();
-  std::string getName();
+  std::vector<eProperty> getProperties() const;
+  std::string getName() const;
   void setName(std::string&);
 
  private:
