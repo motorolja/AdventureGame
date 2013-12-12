@@ -52,7 +52,7 @@ void TextOutputSystem::writeOutput()
       //skriv ut spelarens hälsa och status
       if(m_message->getPlayer().getHealth() == 0)
 	{
-	  printw("You died!\n");
+	  printw("You died!\nGAME OVER");
 	}
       else
 	{
