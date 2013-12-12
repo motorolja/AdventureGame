@@ -143,7 +143,7 @@ bool Engine::PlayerSave()
 
 bool Engine::GodSave(string path)
 {
-	return m_filehandler.savePlayer(m_filename, m_player) && m_filehandler.saveWorld(m_filename, m_world);
+	return m_filehandler.savePlayer(path, m_player) && m_filehandler.saveWorld(path, m_world);
 }
 
 bool Engine::MakeRoom(string direction, string room_name, string room_description)
