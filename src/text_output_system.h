@@ -1,4 +1,3 @@
-//---
 #ifndef TEXT_OUTPUT_SYSTEM_H_INCLUDED
 #define TEXT_OUTPUT_SYSTEM_H_INCLUDED
 
@@ -13,12 +12,11 @@ class TextOutputSystem : public OutputSystem
   virtual ~TextOutputSystem() noexcept { endwin();}
  TextOutputSystem() : OutputSystem()
     {
-      initscr();                                 // initsierar screen
+      initscr();                     // initsierar screen
       start_color();
 
       init_pair(1, COLOR_GREEN, COLOR_BLACK);
 
-      //attron(COLOR_PAIR(1));
       wbkgd(stdscr, COLOR_PAIR(1));
       printw("Welcome to the Adventure Game");
       printw("\n>");
@@ -35,10 +33,10 @@ class TextOutputSystem : public OutputSystem
 
   //std::unordered_multimap<int,std::string> m_defaultstrings;
   const std::unordered_multimap<int,std::string> m_defaultstrings{
-    {EngineMessage::cunknown,"Invalid command"},// Default Message string
+    {EngineMessage::cunknown,"Invalid command"},
     {EngineMessage::chelp,"Player Commands: help, list, go, eat, throw, take, save"},
     {EngineMessage::chelp,"God Commands: makeroom, make, delete, destroy, jump, rooms"},
-    {EngineMessage::clist,"Your inventory:"}, //specialfall
+    {EngineMessage::clist,"Your inventory:"},
     {EngineMessage::clist,"Your inventory: Empty"},
     {EngineMessage::cgo,"You go"},
     {EngineMessage::cgo,"You can´t go that direction!"},
@@ -60,9 +58,8 @@ class TextOutputSystem : public OutputSystem
     {EngineMessage::cdestroy,"You can't destroy that room!"},
     {EngineMessage::cjump,"You jumped to"},
     {EngineMessage::cjump,"You can't jump to"},
-    //cjump
     {EngineMessage::oload,"You see: "},
-    {EngineMessage::crooms,"Existing rooms:"} //specialfall
+    {EngineMessage::crooms,"Existing rooms:"}
   };
 };
 
