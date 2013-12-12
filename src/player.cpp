@@ -32,7 +32,7 @@ void Player::clearStatus()
     m_statuses.clear();    // "Status" inneh�ller inte pekare
 }
 
-std::vector<Status> Player::getStatuses()
+std::vector<Status> Player::getStatuses() const
 {
     return m_statuses;
 }
