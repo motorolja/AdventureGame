@@ -138,16 +138,12 @@ bool Engine::Take(std::string item_name)
 
 bool Engine::PlayerSave()
 {
-	m_filehandler.savePlayer(m_filename);// !!Lägg till bool returntyp till save funktioner!!
-	m_filehandler.saveWorld(m_filename);
-	return true;
+	return m_filehandler.savePlayer(m_filename, m_player) && m_filehandler.saveWorld(m_filename, m_world);
 }
 
 bool Engine::GodSave(string path)
 {
-	m_filehandler.savePlayer(m_filename);// !!Lägg till bool returntyp till save funktioner!!
-	m_filehandler.saveWorld(m_filename);
-	return true;
+	return m_filehandler.savePlayer(m_filename) && m_filehandler.saveWorld(m_filename);
 }
 
 bool Engine::MakeRoom(string direction, string room_name, string room_description)
@@ -330,7 +326,7 @@ bool Engine::Jump(string room_name)
 	return false;
 }
 
-void Engine::startRoom() //ska bort snart
+/*void Engine::startRoom() //ska bort snart
 {
 	Room* newroom = nullptr;
 	newroom = new Room( "The beginning", "Once upon a time.." );
@@ -343,7 +339,7 @@ void Engine::startRoom() //ska bort snart
 	newroom->addItem(t2);
 	newroom->addItem(t3);
 	m_world.setRoom( m_player.getPosition(), newroom );
-}
+}*/
 
 bool Engine::update()
 {
@@ -364,8 +360,8 @@ bool Engine::update()
 			{
 				case BaseMessage::eCommand::oload: //this should never come from TextInputSystem
 					//
-					m_world = m_filehandler.loadWorld(m_filename);
-					m_player = m_filehandler.loadPlayer(m_filename);
+					m_filehandler.loadWorld(m_filename, m_world);
+					m_filehandler.loadPlayer(m_filename, m_player);
 					//startRoom();
 				break;
 				case BaseMessage::eCommand::cunknown:
