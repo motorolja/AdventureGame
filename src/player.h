@@ -28,7 +28,7 @@ public:
     
     void addItem(Item);
     void removeItem(int index);
-    std::vector<Item> getInventory();
+    std::vector<Item> getInventory() const;
     
     void addStatus(Status);
     void clearStatus();
