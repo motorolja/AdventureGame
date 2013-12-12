@@ -14,13 +14,12 @@ class TextOutputSystem : public OutputSystem
     {
       initscr();                     // initsierar screen
       start_color();
-
+      scrollok(stdscr,TRUE);
       init_pair(1, COLOR_GREEN, COLOR_BLACK);
 
       wbkgd(stdscr, COLOR_PAIR(1));
-      printw("Welcome to the Adventure Game");
+      printw("|--------------------The Adventure Game--------------------|");
       printw("\n>");
-      scrollok(stdscr,TRUE);
       refresh();
 
     }
@@ -58,7 +57,7 @@ class TextOutputSystem : public OutputSystem
     {EngineMessage::cdestroy,"You can't destroy that room!"},
     {EngineMessage::cjump,"You jumped to"},
     {EngineMessage::cjump,"You can't jump to"},
-    {EngineMessage::oload,"You see: "},
+    {EngineMessage::oload,"Welcome player, to a world filled with adventures!\nAnd this is where your journey begins..."},
     {EngineMessage::crooms,"Existing rooms:"}
   };
 };
