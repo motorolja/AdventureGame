@@ -15,10 +15,10 @@ public:
     FileHandler(const std::string& filename) : m_file(),m_oldFilename(filename),m_oldFile(false){}
 
     Player loadPlayer(const std::string&);
-    bool savePlayer(const std::string&, Player);
+    bool savePlayer(const std::string&,const Player&);
 
     World loadWorld(const std::string&);
-    bool saveWorld(const std::string&, World);
+    bool saveWorld(const std::string&,const World&);
 
     bool isLastLoadSucccessful() const {return m_oldFile;}
 private:

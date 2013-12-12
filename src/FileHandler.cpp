@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool FileHandler::savePlayer(const string& filename, Player player)
+bool FileHandler::savePlayer(const string& filename,const Player& player)
 {
  stringstream ss;
  //ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
@@ -89,9 +89,10 @@ Player FileHandler::loadPlayer(const string& filename)
  return player;
 }
 
-bool FileHandler::saveWorld(const string& filename, World world)
+bool FileHandler::saveWorld(const string& filename,const World& world)
 {
- ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
+ //ios_base::openmode mode = ((m_oldFile && m_oldFilename == filename) ? ios::trunc : ios::app);
+ ios_base::openmode mode = ios::trunc;
  m_file.open(filename,ios::out | mode);
 
  stringstream ss;
