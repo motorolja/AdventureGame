@@ -61,7 +61,7 @@ void Player::removeItem(int index)
   // kanske kasta ett exception om f�rem�let inte fanns
 }
 
-std::vector<Item> Player::getInventory()
+std::vector<Item> Player::getInventory() const
 {
     return m_inventory;
 }
