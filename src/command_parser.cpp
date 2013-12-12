@@ -27,7 +27,7 @@ CommandParser::CommandParser()
   m_command_table.push_back("destroy"); // 14   1, string (riktning)
   m_command_table.push_back("jump");    // 15   1/2, string/(<int> <int>)
   m_command_table.push_back("rooms");   // 16   0
-  m_command_table.push_back("save");    // 17   1, string
+  //m_command_table.push_back("save");    // 10   1, string
 }
 
 bool CommandParser::direction(std::string& argument)
@@ -50,7 +50,7 @@ bool CommandParser::oneArgument(std::vector<std::string>& arguments)
 				     m_command_index == 4 || m_command_index == 5 || 
 				     m_command_index == 12|| m_command_index == 13||
 				     m_command_index == 14|| m_command_index == 15||
-				     m_command_index == 17 ));
+				     m_command_index == 10 ));
 }
 
 bool CommandParser::jumpIntInt(std::vector<std::string>& arguments)
@@ -121,8 +121,6 @@ InputMessage* CommandParser::getData(std::string& command, std::vector<std::stri
       msg->setValid( false );
       //return "invalid command"; // Test
     }
-  if( m_command_index == 17 )// för det finns 2 olika saves
-    m_command_index = 10;
   msg->setCommand( (BaseMessage::eCommand)m_command_index );
   for(int i = 0; i < arguments.size(); ++i )
     msg->addArgument( arguments.at(i) );
