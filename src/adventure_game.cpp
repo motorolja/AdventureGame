@@ -13,7 +13,7 @@ AdventureGame::AdventureGame(int argc, char*argv[])
 	}
 	input = new TextInputSystem();
 	output = new TextOutputSystem();
-	engine = new Engine(god_mode);
+	engine = new Engine(string(argv[1]), god_mode);
 	m_running = true;
 	
 	if(argc >= 2)
