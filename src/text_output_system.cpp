@@ -49,7 +49,7 @@ void TextOutputSystem::writeOutput()
       printw("\n");
       printw(s.c_str());
       printw("\n");
-      //skriv ut spelarens hälsa
+      //skriv ut spelarens hälsa och status
       if(m_message->getPlayer().getHealth() == 0)
 	{
 	  printw("You died!\n");
@@ -61,11 +61,25 @@ void TextOutputSystem::writeOutput()
 	  s = "Your Health: " + ss.str();
 	  printw(s.c_str());
 	  printw("\n");
+	  s = "Your Status: ";
+	  if(m_message->getPlayer().getStatuses().empty())
+	    {
+	      s+="No status ailments";
+	    }
+	  else
+	    {
+	      for(auto i:m_message->getPlayer().getStatuses())
+		{
+		  s+=i.m_status;
+		}
+	    }
 	}
+      printw(s.c_str());
+      printw("\n");
     }
   printw(">");
   refresh();
-  getchar(); // för testning av output och ska tas bort när man testar med input
+  getchar();
 }
 
 std::string TextOutputSystem::getDefstring() const
@@ -142,14 +156,26 @@ std::string TextOutputSystem::completeString( const std::string& defstring)
 
   else
     {
-
       vector<string> args = m_message->getArguments();
-      for(int i = 0; i < args.size(); ++i)
-        {
-          temp = " " + args.at(i);
-          _complete_string.append(temp);
+      if(m_message->getCommand() == EngineMessage::cmake)
+	{
+	  temp = " " + args.at(0);
+	  _complete_string.append(temp);
+	}
+      else if(m_message->getCommand() == EngineMessage::cmakeroom)
+	{
+	  temp = " " + args.at(1);
+	  _complete_string.append(temp);
+	}
+      else
+	{
+	  for(int i = 0; i < args.size(); ++i)
+	    {
+	      temp = " " + args.at(i);
+	      _complete_string.append(temp);
 
-        }
+	    }
+	}
     }
   return _complete_string;
 }
