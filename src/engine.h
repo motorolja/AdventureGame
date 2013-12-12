@@ -35,7 +35,7 @@ private:
 	bool Jump(std::string x, std::string y);
 	bool Jump(std::string room_name);
 	
-	void startRoom();
+	//void startRoom();
 
 	std::string		m_filename;
 	bool			m_running;
