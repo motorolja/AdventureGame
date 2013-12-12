@@ -22,12 +22,12 @@ void Item::clearProperties()
   m_properties.clear();
 }
 
-std::vector<eProperty> Item::getProperties()
+std::vector<eProperty> Item::getProperties() const
 {
   return m_properties;
 }
 
-std::string Item::getName()
+std::string Item::getName() const
 {
   return m_name;
 }
