@@ -21,7 +21,7 @@ CommandParser::CommandParser()
   m_command_table.push_back("defend");  // 9    ?, ?
   m_command_table.push_back("save");    // 10   0
   //Världskaparkommandon
-  m_command_table.push_back("makeroom");// 11   2, <string>(riktning), <string>
+  m_command_table.push_back("makeroom");// 11   3, <string>(riktning), <string>, <string>
   m_command_table.push_back("make");    // 12   1+, <string>,.<.><.> mellan 1 till max antal egenskaper+1
   m_command_table.push_back("delete");  // 13   1, string    
   m_command_table.push_back("destroy"); // 14   1, string (riktning)
