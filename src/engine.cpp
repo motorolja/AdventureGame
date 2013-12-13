@@ -92,6 +92,7 @@ bool Engine::Eat(std::string item_name)
 		if(poison == true)
 			m_player.addStatus( Status(poisoned, 3) );
 		m_player.removeItem( index );
+		m_player.setHealth( m_player.getHealth() + 1 );
 		return true;
 	}
 	else
