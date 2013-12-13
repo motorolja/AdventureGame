@@ -6,7 +6,7 @@
 
 enum eProperty
   {
-    junk,
+    junk=0,
     edible,
     poisonous
   };
