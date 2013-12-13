@@ -86,6 +86,8 @@ bool Engine::Eat(std::string item_name)
 	{
 		if(properties[i] == poisonous)
 			poison = true;
+		if(properties[i] == edible)
+			edible = true;
 	}
 	if(edible == true)
 	{
